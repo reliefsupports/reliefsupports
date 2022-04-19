@@ -1,3 +1,10 @@
+import PageLayout from 'layouts/PageLayout';
+import Tabs from 'components/Tabs';
+
 export default function Home() {
-  return <div>Home</div>;
+  return (
+    <PageLayout>
+      <Tabs />
+    </PageLayout>
+  );
 }

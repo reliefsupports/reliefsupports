@@ -1,7 +1,7 @@
 import ThemeProvider from './ThemeProvider';
 
 type Props = {
-  children: JSX.Element;
+  children: React.ReactNode;
 };
 
 export default function Providers({ children }: Props) {
