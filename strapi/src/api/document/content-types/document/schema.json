@@ -64,7 +64,7 @@
         "NoPriority"
       ]
     },
-    "Category": {
+    "category": {
       "type": "enumeration",
       "enum": [
         "Medicine",
