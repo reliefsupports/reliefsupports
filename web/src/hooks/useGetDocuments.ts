@@ -11,7 +11,7 @@ const useGetDocuments = () => {
     setLoading(true);
     if (data && data.length) return data; // cache the data.
     try {
-      const url = `${baseURL}/documents?${query}`;
+      const url = `${baseURL}/documents?${query ?? ''}`;
       const response = await fetch(url);
       const { data } = await response.json();
       setData(data);

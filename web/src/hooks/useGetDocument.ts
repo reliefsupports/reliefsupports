@@ -14,7 +14,7 @@ const useGetDocument = () => {
     if (isEmpty(id)) return;
     if (!isEmpty(id) && id === prevId) return data; // cache the data.
     try {
-      const url = `${baseURL}/documents/${id}?${query}`;
+      const url = `${baseURL}/documents/${id}?${query ?? ''}`;
       const response = await fetch(url);
       const { data } = await response.json();
       setData(data);
