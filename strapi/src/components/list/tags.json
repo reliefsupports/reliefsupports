@@ -2,8 +2,13 @@
   "collectionName": "components_list_tags",
   "info": {
     "displayName": "tags",
-    "icon": "tags"
+    "icon": "tags",
+    "description": ""
   },
   "options": {},
-  "attributes": {}
+  "attributes": {
+    "type": {
+      "type": "string"
+    }
+  }
 }
