@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useGetDocument } from '../../hooks/useGetDocument';
 import { isEmpty } from 'lodash';
 
-export default function Donation({ id }: { id: string }) {
+export default function Offer({ id }: { id: string }) {
   const getDocumentAPI = useGetDocument();
 
   useEffect(() => {
@@ -14,8 +14,8 @@ export default function Donation({ id }: { id: string }) {
   if (getDocumentAPI.loading) return <div>Loading!</div>;
   if (isEmpty(getDocumentAPI.data)) return <div>No record!</div>;
 
-  const donation = getDocumentAPI.data;
+  const offer = getDocumentAPI.data;
   const { type, district, description, priority, category, status } =
-    donation?.attributes!;
-  return <div>donation type: {type}</div>;
+    offer?.attributes!;
+  return <div>offer type: {type}</div>;
 }

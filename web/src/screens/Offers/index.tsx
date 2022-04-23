@@ -18,7 +18,7 @@ const query = qs.stringify(
   }
 );
 
-export default function Donations() {
+export default function Offers() {
   const getDocumentsAPI = useGetDocuments();
 
   useEffect(() => {
@@ -28,14 +28,14 @@ export default function Donations() {
   if (getDocumentsAPI.loading) return <div>Loading!</div>;
   if (isEmpty(getDocumentsAPI.data)) return <div>no donations!</div>;
 
-  const donations = getDocumentsAPI.data;
+  const offers = getDocumentsAPI.data;
 
   return (
     <div>
-      {donations!.map((donation) => {
+      {offers!.map((offer) => {
         const { type, district, description, priority, category, status } =
-          donation.attributes;
-        return <div key={donation.id}> donation type: {type}</div>;
+          offer.attributes;
+        return <div key={offer.id}> offer type: {type}</div>;
       })}
     </div>
   );
