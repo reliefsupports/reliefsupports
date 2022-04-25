@@ -1,0 +1,90 @@
+{
+  "kind": "collectionType",
+  "collectionName": "documents",
+  "info": {
+    "singularName": "document",
+    "pluralName": "documents",
+    "displayName": "Document",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "request",
+        "offer"
+      ]
+    },
+    "district": {
+      "type": "enumeration",
+      "enum": [
+        "Colombo",
+        "Galle",
+        "Gampaha",
+        "Hambantota",
+        "Jaffna",
+        "Kalutara",
+        "Kandy",
+        "Kegalle",
+        "Kilinochchi",
+        "Kurunegala",
+        "Mannar",
+        "Matale",
+        "Matara",
+        "Moneragala",
+        "Mullaitivu",
+        "Nuwara Eliya",
+        "Polonnaruwa",
+        "Puttalam",
+        "Ratnapura",
+        "Trincomalee",
+        "Vavuniya"
+      ]
+    },
+    "description": {
+      "type": "text"
+    },
+    "tags": {
+      "displayName": "tags",
+      "type": "component",
+      "repeatable": true,
+      "component": "list.tags"
+    },
+    "priority": {
+      "type": "enumeration",
+      "enum": [
+        "Urgent",
+        "High",
+        "Normal",
+        "Low",
+        "NoPriority"
+      ]
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "Medicine",
+        "Food",
+        "Transport"
+      ]
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "Active",
+        "Attended",
+        "Resolved",
+        "Archived"
+      ]
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user"
+    }
+  }
+}
