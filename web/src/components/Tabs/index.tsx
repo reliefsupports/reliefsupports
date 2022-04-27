@@ -1,3 +1,4 @@
+import Request from 'components/Requests';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
@@ -13,7 +14,7 @@ export default function TabsContainer() {
       </TabList>
 
       <TabPanel>
-        <p>Requests - List</p>
+        <Request />
       </TabPanel>
       <TabPanel>
         <p>Help Offer - List</p>
