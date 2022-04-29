@@ -8,7 +8,7 @@ const useCreateDocument = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const getDocument = async ({ documentData }: { documentData: Document }) => {
+  const createDocument = async ({ documentData }: { documentData: Document }) => {
     setLoading(true);
     if (isEmpty(documentData)) return;
     try {
@@ -30,7 +30,7 @@ const useCreateDocument = () => {
     isCreated,
     error,
     loading,
-    getDocument,
+    createDocument,
   };
 };
 
