@@ -1,28 +1,34 @@
 import PageLayout from 'layouts/PageLayout';
 import Tabs from 'components/Tabs';
 import React from 'react';
-import { AddOfferModal } from 'components/modals/addOfferModal';
-import { AddRequestModal } from 'components/modals/addRequestModal';
+import { AddDataModal } from 'components/modals/addDataModal';
 
 export default function Home() {
   
-  const [openOfferForm, setOpenOfferForm] = React.useState(false);
-  const handleOpenOfferForm = () => setOpenOfferForm(true);
-  const handleCloseOfferForm = () => setOpenOfferForm(false);
+  const [openForm, setOpenForm] = React.useState(false);
+  const [type, setType] = React.useState('');
 
-  const [openReqForm, setOpenReqForm] = React.useState(false);
-  const handleOpenReqForm = () => setOpenReqForm(true);
-  const handleCloseReqForm = () => setOpenReqForm(false);
+  const handleOpenOfferForm = () => {
+    setType("offer");
+    setOpenForm(true)
+  };
+
+  const handleOpenRequestForm = () => {
+    setType("request");
+    setOpenForm(true)
+  };
+  const handleCloseForm = () => {
+    setOpenForm(false)
+  };
 
   return (
     <PageLayout>
 
       <Tabs />
 
-      <AddOfferModal open={openOfferForm} handleOpen={handleOpenOfferForm} handleClose={handleCloseOfferForm} />
-      <AddRequestModal open={openReqForm} handleOpen={handleOpenReqForm} handleClose={handleCloseReqForm} />
+      <AddDataModal open={openForm} type={type} method='add' handleClose={handleCloseForm} />
 
-      <button onClick={() => handleOpenReqForm()}> Add Resuests</button>
+      <button onClick={() => handleOpenRequestForm()}> Add Resuests</button>
       <br/>
       <button onClick={() => handleOpenOfferForm()}> Add Offers</button>
 
