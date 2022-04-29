@@ -9,7 +9,7 @@ function App() {
     <div>
       {/* Put routes here. */}
       <Home />
-      <Offers />
+      {/* <Offers /> */}
       <Offer id="2" />
       <Requests />
       <Request id="1" />
