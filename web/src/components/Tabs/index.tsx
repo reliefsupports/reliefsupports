@@ -13,14 +13,11 @@ export default function TabsContainer() {
         <Tab>Requests</Tab>
         <Tab>Help Offer</Tab>
       </TabList>
-
       <TabPanel>
         <Requests />
-        <p>Requests - List</p>
       </TabPanel>
       <TabPanel>
         <Offers />
-        <p>Help Offer - List</p>
       </TabPanel>
     </Tabs>
   );
