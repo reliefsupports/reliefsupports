@@ -18,19 +18,6 @@ import {
   TableRow,
 } from '@mui/material';
 
-const query = qs.stringify(
-  {
-    filters: {
-      type: {
-        $eq: 'request',
-      },
-    },
-  },
-  {
-    encodeValuesOnly: true,
-  }
-);
-
 export default function Requests() {
   const getDocumentsAPI = useGetDocuments();
 
@@ -85,23 +72,23 @@ export default function Requests() {
       {
         filters: {
           type: {
-            $eq: 'offer',
+            $eq: 'request',
           },
-          district: {
-            type: {
-              $eq: district || undefined,
-            },
-          },
-          priority: {
-            type: {
-              $eq: priority || undefined,
-            },
-          },
-          category: {
-            type: {
-              $eq: category || undefined,
-            },
-          },
+          district: district
+            ? {
+                $eq: district,
+              }
+            : undefined,
+          priority: priority
+            ? {
+                $eq: priority,
+              }
+            : undefined,
+          category: category
+            ? {
+                $eq: category,
+              }
+            : undefined,
         },
       },
       {
