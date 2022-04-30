@@ -1,7 +1,7 @@
 import React from 'react';
 import PageLayout from 'layouts/PageLayout';
 import Tabs from 'components/Tabs';
-import Modal from 'components/Modals';
+import Modal from 'components/FormModal';
 
 export default function Home() {
   const [openForm, setOpenForm] = React.useState(false);
