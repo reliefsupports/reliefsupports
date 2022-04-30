@@ -1,6 +1,7 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import Offers from 'screens/Offers';
+import Requests from 'screens/Requests';
 
 /**
  * @todo: make this generic and reusable
@@ -14,10 +15,11 @@ export default function TabsContainer() {
       </TabList>
 
       <TabPanel>
+        <Requests />
         <p>Requests - List</p>
       </TabPanel>
       <TabPanel>
-        <Offers/>
+        <Offers />
         <p>Help Offer - List</p>
       </TabPanel>
     </Tabs>

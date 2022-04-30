@@ -10,9 +10,9 @@ function App() {
       {/* Put routes here. */}
       <Home />
       {/* <Offers /> */}
-      <Offer id="2" />
-      <Requests />
-      <Request id="1" />
+      {/* <Offer id="2" /> */}
+      {/* <Requests /> */}
+      {/* <Request id="1" /> */}
     </div>
   );
 }

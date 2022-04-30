@@ -36,10 +36,35 @@ export default function Offers() {
     setCategory(event.target.value);
   };
 
-  const districts = ['Colombo', 'Gampaha', "Kalutara", "Kandy", "Matale", "Nuwara Eliya", "Galle", "Matara", "Hambanthota", "Jaffna", "Kilinochchi", "Mannar", "Vavuniya", "Mullativ", "Batticaloa", "Ampara", "Trincomalee", "Kurunegala", "Puttalam", "Anuradhapura", "Polonnaruwa", "Badulla", "Moneragala", "Ratnapura", "Kegalle"];
-  const priorities = ['High', 'Medium', "Low"];
-  const categories = ['Medicine', 'Food', "Transport"];
-
+  const districts = [
+    'Colombo',
+    'Gampaha',
+    'Kalutara',
+    'Kandy',
+    'Matale',
+    'Nuwara Eliya',
+    'Galle',
+    'Matara',
+    'Hambanthota',
+    'Jaffna',
+    'Kilinochchi',
+    'Mannar',
+    'Vavuniya',
+    'Mullativ',
+    'Batticaloa',
+    'Ampara',
+    'Trincomalee',
+    'Kurunegala',
+    'Puttalam',
+    'Anuradhapura',
+    'Polonnaruwa',
+    'Badulla',
+    'Moneragala',
+    'Ratnapura',
+    'Kegalle',
+  ];
+  const priorities = ['High', 'Medium', 'Low'];
+  const categories = ['Medicine', 'Food', 'Transport'];
 
   useEffect(() => {
     const query = qs.stringify(
@@ -48,15 +73,21 @@ export default function Offers() {
           type: {
             $eq: 'offer',
           },
-          destrict: district ? {
-            $eq: district,
-          } : undefined,
-          priority: priority ? {
-            $eq: priority,
-          } : undefined,
-          category: category ? {
-            $eq: category,
-          } : undefined,
+          destrict: district
+            ? {
+                $eq: district,
+              }
+            : undefined,
+          priority: priority
+            ? {
+                $eq: priority,
+              }
+            : undefined,
+          category: category
+            ? {
+                $eq: category,
+              }
+            : undefined,
         },
       },
       {
@@ -64,7 +95,6 @@ export default function Offers() {
       }
     );
     getDocumentsAPI.getDocuments({ query: query });
-
   }, [district, priority, category]);
 
   if (getDocumentsAPI.error) return <div>Error!</div>;
@@ -75,9 +105,9 @@ export default function Offers() {
 
   return (
     <Container maxWidth="lg">
-      <Paper  style={{margin:20}}>
+      <Paper style={{ margin: 20 }}>
         <div>
-          <FormControl style={{width:140, margin:20}}>
+          <FormControl style={{ width: 140, margin: 20 }}>
             <InputLabel id="district-select-label">District</InputLabel>
             <Select
               labelId="district-select-label"
@@ -86,12 +116,16 @@ export default function Offers() {
               label="District"
               onChange={handleChangeDistrict}
             >
-              {districts.map(el => {
-                return <MenuItem key={el} value={el}>{el}</MenuItem>;
+              {districts.map((el) => {
+                return (
+                  <MenuItem key={el} value={el}>
+                    {el}
+                  </MenuItem>
+                );
               })}
             </Select>
           </FormControl>
-          <FormControl style={{width:130, margin:20}}>
+          <FormControl style={{ width: 130, margin: 20 }}>
             <InputLabel id="priotity-select-label">Priority</InputLabel>
             <Select
               labelId="priotity-select-label"
@@ -100,12 +134,16 @@ export default function Offers() {
               label="Priority"
               onChange={handleChangePriority}
             >
-              {priorities.map(el => {
-                return <MenuItem key={el} value={el}>{el}</MenuItem>;
+              {priorities.map((el) => {
+                return (
+                  <MenuItem key={el} value={el}>
+                    {el}
+                  </MenuItem>
+                );
               })}
             </Select>
           </FormControl>
-          <FormControl style={{width:140, margin:20}}>
+          <FormControl style={{ width: 140, margin: 20 }}>
             <InputLabel id="category-select-label">Categoty</InputLabel>
             <Select
               labelId="category-select-label"
@@ -114,48 +152,68 @@ export default function Offers() {
               label="Categoty"
               onChange={handleChangeCategory}
             >
-              {categories.map(el => {
-                return <MenuItem key={el} value={el}>{el}</MenuItem>;
+              {categories.map((el) => {
+                return (
+                  <MenuItem key={el} value={el}>
+                    {el}
+                  </MenuItem>
+                );
               })}
             </Select>
           </FormControl>
         </div>
       </Paper>
-      {getDocumentsAPI.loading ? <div>Loading!</div> : isEmpty(getDocumentsAPI.data) ?  <div>no donations!</div> : 
-      <TableContainer style={{margin:20}} component={Paper}>
-        <Table sx={{ maxWidth: '100%' }} size="small" aria-label="a dense table">
-          <TableHead>
-            <TableRow>
-              <TableCell>Offer ID</TableCell>
-              <TableCell align="right">District</TableCell>
-              <TableCell align="right">Description</TableCell>
-              <TableCell align="right">Priority</TableCell>
-              <TableCell align="right">Category</TableCell>
-              <TableCell align="right">Status</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {offers!.map((offer) => {
-              const { type, district, description, priority, category, status } = offer.attributes;
-              return (
-              <TableRow
-                key={offer.id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {offer.id}
-                </TableCell>
-                <TableCell align="right">{district}</TableCell>
-                <TableCell align="right">{description}</TableCell>
-                <TableCell align="right">{priority}</TableCell>
-                <TableCell align="right">{category}</TableCell>
-                <TableCell align="right">{status}</TableCell>
+      {getDocumentsAPI.loading ? (
+        <div>Loading!</div>
+      ) : isEmpty(getDocumentsAPI.data) ? (
+        <div>no donations!</div>
+      ) : (
+        <TableContainer style={{ margin: 20 }} component={Paper}>
+          <Table
+            sx={{ maxWidth: '100%' }}
+            size="small"
+            aria-label="a dense table"
+          >
+            <TableHead>
+              <TableRow>
+                <TableCell>Offer ID</TableCell>
+                <TableCell align="right">District</TableCell>
+                <TableCell align="right">Description</TableCell>
+                <TableCell align="right">Priority</TableCell>
+                <TableCell align="right">Category</TableCell>
+                <TableCell align="right">Status</TableCell>
               </TableRow>
-            )})}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    }
+            </TableHead>
+            <TableBody>
+              {offers!.map((offer) => {
+                const {
+                  type,
+                  district,
+                  description,
+                  priority,
+                  category,
+                  status,
+                } = offer.attributes;
+                return (
+                  <TableRow
+                    key={offer.id}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell component="th" scope="row">
+                      {offer.id}
+                    </TableCell>
+                    <TableCell align="right">{district}</TableCell>
+                    <TableCell align="right">{description}</TableCell>
+                    <TableCell align="right">{priority}</TableCell>
+                    <TableCell align="right">{category}</TableCell>
+                    <TableCell align="right">{status}</TableCell>
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
     </Container>
   );
 }
