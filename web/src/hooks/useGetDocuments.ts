@@ -9,7 +9,8 @@ const useGetDocuments = () => {
 
   const getDocuments = async ({ query }: { query?: string }) => {
     setLoading(true);
-    if (data && data.length) return data; // cache the data.
+
+    // if (data && data.length) return data; // cache the data.
     try {
       const url = `${baseURL}/documents?${query ?? ''}`;
       const response = await fetch(url);

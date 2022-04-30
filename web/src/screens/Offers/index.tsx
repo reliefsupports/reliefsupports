@@ -73,7 +73,7 @@ export default function Offers() {
           type: {
             $eq: 'offer',
           },
-          destrict: district
+          district: district
             ? {
                 $eq: district,
               }
@@ -94,6 +94,7 @@ export default function Offers() {
         encodeValuesOnly: true,
       }
     );
+
     getDocumentsAPI.getDocuments({ query: query });
   }, [district, priority, category]);
 
