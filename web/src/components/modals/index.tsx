@@ -91,7 +91,7 @@ export default function ModalC(props: any) {
             <Dropdown
               label="district"
               value={district}
-              onChange={setDistrict}
+              onChange={handleChangeDistrict}
               optionsList={districts}
             />
           </FormControl>
@@ -114,7 +114,7 @@ export default function ModalC(props: any) {
             <Dropdown
               label="priority"
               value={priority}
-              onChange={setPriority}
+              onChange={handleChangePriority}
               optionsList={priorities}
             />
           </FormControl>
@@ -123,7 +123,7 @@ export default function ModalC(props: any) {
             <Dropdown
               label="category"
               value={category}
-              onChange={setCategory}
+              onChange={handleChangeCategory}
               optionsList={categories}
             />
           </FormControl>
