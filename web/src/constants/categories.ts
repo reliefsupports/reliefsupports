@@ -1,1 +1,7 @@
-export const categories = ['Medicine', 'Food', 'Transport'];
+export const categories = [
+  'Medicine',
+  'Food',
+  'Transport',
+  'Education',
+  'Cloths',
+];

@@ -2,6 +2,7 @@ import React from 'react';
 import PageLayout from 'layouts/PageLayout';
 import Tabs from 'components/Tabs';
 import Modal from 'components/FormModal';
+import Button from '@mui/material/Button';
 
 export default function Home() {
   const [openForm, setOpenForm] = React.useState(false);
@@ -29,9 +30,13 @@ export default function Home() {
         method="add"
         handleClose={handleCloseForm}
       />
-      <button onClick={() => handleOpenRequestForm()}> Add Requests</button>
+      <Button variant="outlined" onClick={() => handleOpenRequestForm()}>
+        Add Requests
+      </Button>
       <br />
-      <button onClick={() => handleOpenOfferForm()}> Add Offers</button>
+      <Button variant="outlined" onClick={() => handleOpenOfferForm()}>
+        Add Offers
+      </Button>
     </PageLayout>
   );
 }

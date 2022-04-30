@@ -38,6 +38,7 @@ const query = ({
           $eq: type,
         },
       },
+      populate: '*',
     },
     {
       encodeValuesOnly: true,

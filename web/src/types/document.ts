@@ -8,9 +8,16 @@ export type Document = {
   createdAt?: Date;
   updatedAt?: Date;
   publishedAt?: Date;
+  verified?: Boolean;
+  tags?: Tags[];
 };
 
 export type DocumentResponse = {
   attributes: Document;
   id: string;
+};
+
+export type Tags = {
+  id: string;
+  type: string;
 };

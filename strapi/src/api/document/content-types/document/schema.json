@@ -22,10 +22,13 @@
     "district": {
       "type": "enumeration",
       "enum": [
+        "Ampara",
         "Colombo",
+        "Badulla",
+        "Batticaloa",
         "Galle",
         "Gampaha",
-        "Hambantota",
+        "Hambanthota",
         "Jaffna",
         "Kalutara",
         "Kandy",
@@ -69,7 +72,9 @@
       "enum": [
         "Medicine",
         "Food",
-        "Transport"
+        "Transport",
+        "Education",
+        "Cloths"
       ]
     },
     "status": {
@@ -85,6 +90,9 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
+    },
+    "verified": {
+      "type": "boolean"
     }
   }
 }
