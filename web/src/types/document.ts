@@ -4,10 +4,10 @@ export type Document = {
   description: string;
   priority: string;
   category: string;
-  status: string;
-  createdAt: Date;
-  updatedAt: Date;
-  publishedAt: Date;
+  status?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
+  publishedAt?: Date;
 };
 
 export type DocumentResponse = {
