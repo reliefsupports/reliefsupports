@@ -1,4 +1,4 @@
-import Header from 'components/Header';
+import Header from 'modules/Header';
 import Footer from 'components/Footer';
 
 type Props = {
