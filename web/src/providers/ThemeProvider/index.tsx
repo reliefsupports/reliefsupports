@@ -4,7 +4,7 @@ import './reset.css';
 import './main.css';
 
 export const Container = styled.div`
-  padding: 43px 100px;
+  padding: 40px 100px;
 `;
 
 type Props = {

@@ -20,7 +20,7 @@ export default function Filters({
   setCategory: (event: any) => void;
 }) {
   return (
-    <Paper style={{ margin: 20 }}>
+    <Paper style={{ margin: '10px 0 0' }}>
       <div>
         <FormControl style={{ width: 140, margin: 20 }}>
           <InputLabel id="district-select-label">District</InputLabel>

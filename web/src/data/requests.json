@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "type": "Medicine",
+    "summary": "Vitamin-C wanted at Nawala",
+    "body": "<p>Urgently need a few packs of Vitamin-C. My contact number 071111111.<p>",
+    "createdAt": "Mon May 02 2022 02:09:18 GMT+0530 (India Standard Time)",
+    "lastUpdatedAt": "Mon May 02 2022 02:09:18 GMT+0530 (India Standard Time)",
+    "postedBy": {
+      "name": "John Doe",
+      "phone": "+94711111111",
+      "avatarUrl": null,
+      "orgnization": null
+    },
+    "status": "Active",
+    "priority": "High",
+    "isVerified": false,
+    "externalSource": null
+  },
+  {
+    "id": 2,
+    "type": "Other",
+    "summary": "Lorem ipsum dolor sit amet",
+    "body": "<p>In vitae risus diam. Nam non pharetra ipsum, in ultricies erat.</p> <p>Morbi facilisis elementum est a viverra.<p>",
+    "createdAt": "Mon May 02 2022 02:09:18 GMT+0530 (India Standard Time)",
+    "lastUpdatedAt": "Mon May 02 2022 02:09:18 GMT+0530 (India Standard Time)",
+    "postedBy": {
+      "name": "Jane Doe",
+      "phone": "+94711111111",
+      "avatarUrl": null,
+      "orgnization": null
+    },
+    "status": "Active",
+    "priority": "Low",
+    "isVerified": true,
+    "externalSource": null
+  },
+  {
+    "id": 3,
+    "type": "Medicine",
+    "summary": "Lorem ipsum dolor sit amet",
+    "body": "<p>In vitae risus diam. Nam non pharetra ipsum, in ultricies erat.</p> <p>Morbi facilisis elementum est a viverra.<p>",
+    "createdAt": "Mon May 02 2022 02:09:18 GMT+0530 (India Standard Time)",
+    "lastUpdatedAt": "Mon May 02 2022 02:09:18 GMT+0530 (India Standard Time)",
+    "postedBy": {
+      "name": "Jane Doe",
+      "phone": "+94711111111",
+      "avatarUrl": null,
+      "orgnization": null
+    },
+    "status": "Active",
+    "priority": "Medium",
+    "isVerified": true,
+    "externalSource": "WatchDog"
+  }
+]

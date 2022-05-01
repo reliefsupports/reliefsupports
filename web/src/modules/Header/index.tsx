@@ -1,21 +1,29 @@
 import { useNavigate } from 'react-router-dom';
 
 import {
+  Container,
   Heading,
   LogoWrapper,
   HeaderActions,
-  SignInButton,
+  CreateButton,
+  AuthButton,
   Select,
   HeaderImage,
+  PlusIcon,
 } from './styled';
 
-export default function Header() {
+export default function Header({ banner = false }: any) {
   const navigate = useNavigate();
+
+  // @todo: get auth status
+  const isAuthenticated = false;
 
   const handleSignIn = () => navigate('/sign-in');
 
+  const handleCreate = () => navigate('/entry-create');
+
   return (
-    <div>
+    <Container>
       <Heading>
         <LogoWrapper>
           <h1>ReliefSupports</h1>
@@ -28,11 +36,16 @@ export default function Header() {
             <option>Ta</option>
           </Select>
 
-          <SignInButton onClick={handleSignIn}>Sign In</SignInButton>
+          <CreateButton onClick={handleCreate}>
+            <PlusIcon /> New Entry
+          </CreateButton>
+          <AuthButton onClick={handleSignIn}>
+            {isAuthenticated ? 'Sign Out' : 'Sign In'}
+          </AuthButton>
         </HeaderActions>
       </Heading>
 
-      <HeaderImage />
-    </div>
+      {banner && <HeaderImage />}
+    </Container>
   );
 }

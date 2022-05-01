@@ -1,3 +1,3 @@
-export { categories } from './categories';
-export { districts } from './district';
-export { priorities } from './priorities';
+export * from './categories';
+export * from './district';
+export * from './priorities';

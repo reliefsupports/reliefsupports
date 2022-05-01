@@ -1,5 +1,12 @@
 import styled from 'styled-components';
 
+import Button from 'components/Button';
+import { PlusIcon as PlusIconSource } from 'assets/icons';
+
+export const Container = styled.div`
+  margin: 0 0 40px;
+`;
+
 export const Heading = styled.div`
   display: flex;
   justify-content: space-between;
@@ -12,31 +19,32 @@ export const HeaderActions = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 15px;
+  gap: 8px;
 `;
 
-export const SignInButton = styled.button`
+export const CreateButton = styled(Button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+`;
+
+export const AuthButton = styled(Button)`
   background: #000000;
-  border-radius: 28px;
   color: #fff;
-  width: 140px;
-  height: 40px;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
 `;
 
 export const Select = styled.select`
-  background: #f3f2f2;
-  border-radius: 46px;
-  width: 55px;
-  height: 27px;
-  padding: 5px 7px;
+  outline: none;
+  font-weight: bold;
 `;
 
 export const HeaderImage = styled.div`
   background-color: #e5e5e5;
   height: 338px;
   width: 100%;
-  margin: 40px 0;
+`;
+
+export const PlusIcon = styled(PlusIconSource)`
+  width: 16px;
 `;
