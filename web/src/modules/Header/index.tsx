@@ -20,7 +20,7 @@ export default function Header({ banner = false }: any) {
 
   const handleSignIn = () => navigate('/sign-in');
 
-  const handleCreate = () => navigate('/entry-create');
+  const handleCreate = () => navigate('/entries/create');
 
   return (
     <Container>

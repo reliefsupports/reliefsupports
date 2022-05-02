@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Home from 'screens/Home';
-import RequestSingle from 'screens/Requests/RequestSingle';
-import OfferSingle from 'screens/Offers/OfferSingle';
+import EntrySingle from 'screens/Entry';
 import CreateEntry from 'screens/Entry/Create';
 import SignIn from 'screens/Auth';
 import Register from 'screens/Auth/Register';
@@ -12,10 +11,9 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="request/:id" element={<RequestSingle />} />
-        <Route path="help-offer/:id" element={<OfferSingle />} />
 
-        <Route path="entry-create" element={<CreateEntry />} />
+        <Route path="entries/create" element={<CreateEntry />} />
+        <Route path="entries/:id" element={<EntrySingle />} />
 
         <Route path="sign-in" element={<SignIn />} />
         <Route path="sign-in/register" element={<Register />} />

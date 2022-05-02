@@ -3,7 +3,7 @@ import Entries from 'modules/Entries';
 
 export default function Home() {
   return (
-    <PageLayout>
+    <PageLayout frontPage>
       <Entries />
     </PageLayout>
   );

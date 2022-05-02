@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 
-import { fetchRequests as apiFetchRequests } from 'api/entries';
+import { fetchOffers as apiFetchOffers } from 'api/entries';
 
 import { IEntry } from 'types';
 
@@ -28,7 +28,7 @@ export const toReadableDate = (dateStr: string) => {
   return dayjs(dateStr).format('MMM DD, YYYY HH:mm');
 };
 
-export default function Requests() {
+export default function Offers() {
   const navigate = useNavigate();
 
   const [requests, setRequests] = useState<any>([]);
@@ -37,14 +37,14 @@ export default function Requests() {
   const [priority, setPriority] = useState('');
   const [keyword, setKeyword] = useState('');
 
-  const fetchRequests = async () => {
-    const _requests = await apiFetchRequests();
+  const fetchOffers = async () => {
+    const _requests = await apiFetchOffers();
     setRequests(_requests);
     setRequestsFiltered(_requests);
   };
 
   useEffect(() => {
-    fetchRequests();
+    fetchOffers();
   }, []);
 
   useEffect(() => {

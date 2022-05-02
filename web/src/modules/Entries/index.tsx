@@ -1,8 +1,8 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 
-import Offers from 'screens/Offers';
 import Requests from './Requests';
+import Offers from './Offers';
 
 export default function Entries() {
   return (

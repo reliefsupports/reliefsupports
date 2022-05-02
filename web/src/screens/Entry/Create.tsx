@@ -1,24 +1,27 @@
 import { Formik } from 'formik';
 
+import PageLayout from 'layouts/PageLayout';
+
+import TextInput from 'components/TextInput';
 import TextArea from 'components/TextArea';
 import Select from 'components/Select';
 import Button from 'components/Button';
 
-import { districtsOptions } from 'constants/district';
-import { categoryOptions } from 'constants/categories';
-import { priorityOptions } from 'constants/priorities';
+import { Type, Category, Priority } from 'types';
+
+import { toOptions } from 'utils';
 
 const initialValues: any = {
-  type: 'Requests',
-  desc: '',
-  district: '',
+  type: 'Request',
   category: '',
+  summary: '',
+  body: '',
   priority: '',
 };
 
 export default function CreateEntry() {
   return (
-    <div>
+    <PageLayout>
       <h1>Create Entry</h1>
       <Formik
         initialValues={initialValues}
@@ -47,38 +50,39 @@ export default function CreateEntry() {
             <Select
               name="type"
               label="Type"
-              options={[
-                { value: 'Requests', label: 'Requests' },
-                { value: 'Help Offers', label: 'Help Offers' },
-              ]}
-            />
-
-            <TextArea
-              name="desc"
-              label="Description"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.desc}
-              error={errors.desc}
-              touched={touched.desc}
-            />
-
-            <Select
-              name="district"
-              label="District"
-              options={districtsOptions}
+              options={toOptions(Object.values(Type))}
             />
 
             <Select
               name="category"
               label="Category"
-              options={categoryOptions}
+              options={toOptions(Object.values(Category))}
+            />
+
+            <TextInput
+              name="summary"
+              label="Summary"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.summary}
+              error={errors.summary}
+              touched={touched.summary}
+            />
+
+            <TextArea
+              name="body"
+              label="Text"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.body}
+              error={errors.body}
+              touched={touched.body}
             />
 
             <Select
               name="priority"
               label="Priority"
-              options={priorityOptions}
+              options={toOptions(Object.values(Priority))}
             />
 
             <Button type="submit" disabled={isSubmitting}>
@@ -87,6 +91,6 @@ export default function CreateEntry() {
           </form>
         )}
       </Formik>
-    </div>
+    </PageLayout>
   );
 }
