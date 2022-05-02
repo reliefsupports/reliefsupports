@@ -45,10 +45,13 @@ export default function Requests() {
         category={category}
         setCategory={handleChangeCategory}
       />
+
       {getDocumentsAPI.loading && <Loading loading />}
+
       {isEmpty(requests) && <NoData isNoData />}
+
       {!isEmpty(requests) && (
-        <TableContainer style={{ margin: 20 }} component={Paper}>
+        <TableContainer style={{ margin: '20px 0' }} component={Paper}>
           <Table
             sx={{ maxWidth: '100%' }}
             size="small"

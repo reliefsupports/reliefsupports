@@ -1,19 +1,24 @@
-import Offer from 'screens/Offer';
-import Offers from 'screens/Offers';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import Home from 'screens/Home';
-import Requests from 'screens/Requests';
-import Request from 'screens/Request';
+import EntrySingle from 'screens/Entry';
+import CreateEntry from 'screens/Entry/Create';
+import SignIn from 'screens/Auth';
+import Register from 'screens/Auth/Register';
 
 function App() {
   return (
-    <div>
-      {/* Put routes here. */}
-      <Home />
-      {/* <Offers /> */}
-      {/* <Offer id="2" /> */}
-      {/* <Requests /> */}
-      {/* <Request id="1" /> */}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+        <Route path="entries/create" element={<CreateEntry />} />
+        <Route path="entries/:id" element={<EntrySingle />} />
+
+        <Route path="sign-in" element={<SignIn />} />
+        <Route path="sign-in/register" element={<Register />} />
+      </Routes>
+    </Router>
   );
 }
 

@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 import { useGetDocuments } from '../../hooks/useGetDocuments';
 import { isEmpty } from 'lodash';
 import Table from '@mui/material/Table';
@@ -43,6 +45,8 @@ export default function Offers() {
 
   return (
     <div>
+      <Link to="/create-entry">+ Add New</Link>
+
       <Filters
         district={district}
         setDistrict={handleChangeDistrict}
