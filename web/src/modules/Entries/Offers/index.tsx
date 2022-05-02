@@ -21,6 +21,7 @@ import {
   Meta,
   DateTime,
   Author,
+  Location,
   Pagination,
 } from './styled';
 
@@ -133,6 +134,7 @@ export default function Offers() {
               lastUpdatedAt,
               postedBy,
               priority,
+              location,
               status,
             } = entry;
             return (
@@ -143,9 +145,9 @@ export default function Offers() {
                   <h4>{summary}</h4>
                   <Desc dangerouslySetInnerHTML={{ __html: body }} />
                   <Meta>
-                    <DateTime>{`At ${toReadableDate(
-                      lastUpdatedAt
-                    )} `}</DateTime>
+                    <Location>{`At ${location.city} `}</Location>
+                    &bull;
+                    <DateTime>{` ${toReadableDate(lastUpdatedAt)} `}</DateTime>
                     &bull;
                     <Author>
                       {` by ${postedBy.name}`}{' '}

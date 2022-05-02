@@ -27,6 +27,10 @@ export type User = {
   orgnization?: string;
 };
 
+export type Location = {
+  city: string;
+};
+
 export interface IEntry {
   id: string;
   type: Type.Request | Type.Offer;
@@ -38,25 +42,7 @@ export interface IEntry {
   postedBy: User;
   status: Status.Active | Status.Resolved | Status.Resolved;
   priority: Priority.High | Priority.Medium | Priority.Low;
+  location: Location;
   isVerified: boolean;
   externalSource?: string;
 }
-
-// {
-//   "id": 1,
-//   "category": "Medicine",
-//   "summary": "Vitamin-C wanted at Nawala",
-//   "body": "<p>Urgently need a few packs of Vitamin-C. My contact number 071111111.<p>",
-//   "createdAt": "Mon May 02 2022 02:09:18 GMT+0530 (India Standard Time)",
-//   "lastUpdatedAt": "Mon May 02 2022 02:09:18 GMT+0530 (India Standard Time)",
-//   "postedBy": {
-//     "name": "John Doe",
-//     "phone": "+94711111111",
-//     "avatarUrl": null,
-//     "orgnization": null
-//   },
-//   "status": "Active",
-//   "priority": "High",
-//   "isVerified": false,
-//   "externalSource": null
-// },

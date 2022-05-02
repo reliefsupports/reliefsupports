@@ -81,6 +81,8 @@ export const DateTime = styled.span``;
 
 export const Author = styled.span``;
 
+export const Location = styled.span``;
+
 export const Pagination = styled.div`
   display: flex;
   justify-content: flex-end;

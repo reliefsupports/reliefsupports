@@ -15,6 +15,9 @@
     },
     "status": "Active",
     "priority": "High",
+    "location": {
+      "city": "Colombo"
+    },
     "isVerified": false,
     "externalSource": null
   },
@@ -34,6 +37,9 @@
     },
     "status": "Active",
     "priority": "Low",
+    "location": {
+      "city": "Colombo"
+    },
     "isVerified": true,
     "externalSource": null
   },
@@ -53,6 +59,9 @@
     },
     "status": "Active",
     "priority": "Medium",
+    "location": {
+      "city": "Colombo"
+    },
     "isVerified": true,
     "externalSource": "WatchDog"
   },
@@ -72,6 +81,9 @@
     },
     "status": "Active",
     "priority": "Medium",
+    "location": {
+      "city": "Colombo"
+    },
     "isVerified": true,
     "externalSource": "WatchDog"
   },
@@ -91,6 +103,9 @@
     },
     "status": "Active",
     "priority": "Medium",
+    "location": {
+      "city": "Colombo"
+    },
     "isVerified": true,
     "externalSource": "WatchDog"
   }
