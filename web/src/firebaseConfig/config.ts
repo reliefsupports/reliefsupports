@@ -1,4 +1,5 @@
 import firebase from 'firebase/compat/app';
+import { getAuth,  signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth"
 import 'firebase/compat/auth';
 
 const firebaseConfig = {
@@ -12,6 +13,14 @@ const firebaseConfig = {
   };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
+export const auth = getAuth(app);
+
+
+export const _signInWithPhoneNumber = async (phoneNumber: string) => {
+  const recaptcha = new RecaptchaVerifier('recaptcha-container', {}, auth);
+  recaptcha.render();
+  return signInWithPhoneNumber(auth, phoneNumber, recaptcha);
+}
 
 export default firebase;
