@@ -1,17 +1,15 @@
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import Offers from 'screens/Offers';
-import Requests from 'screens/Requests';
 
-/**
- * @todo: make this generic and reusable
- */
-export default function TabsContainer() {
+import Requests from './Requests';
+import Offers from './Offers';
+
+export default function Entries() {
   return (
     <Tabs>
       <TabList>
         <Tab>Requests</Tab>
-        <Tab>Help Offer</Tab>
+        <Tab>Help Offers</Tab>
       </TabList>
       <TabPanel>
         <Requests />

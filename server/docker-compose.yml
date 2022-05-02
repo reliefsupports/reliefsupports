@@ -1,0 +1,16 @@
+version: '3'
+services:
+  api:
+    container_name: reliefsupports_api
+    build: .
+    ports:
+      - '5000:5000'
+    links:
+      - mongo
+  mongo:
+    container_name: reliefsupports_db
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - '27017:27017'

@@ -45,4 +45,8 @@ const query = ({
     }
   );
 };
+
 export { capitalize, query };
+
+export const toOptions = (list: string[]) =>
+  list.map((str: string) => ({ value: str, label: str }));

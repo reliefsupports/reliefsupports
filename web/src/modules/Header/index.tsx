@@ -1,32 +1,51 @@
-import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
-export const Heading = styled.div`
-  display: flex;
-`;
+import {
+  Container,
+  Heading,
+  LogoWrapper,
+  HeaderActions,
+  CreateButton,
+  AuthButton,
+  Select,
+  HeaderImage,
+  PlusIcon,
+} from './styled';
 
-export const SignInButton = styled.button``;
+export default function Header({ banner = false }: any) {
+  const navigate = useNavigate();
 
-export const HeaderImage = styled.div`
-  background-color: #ccc;
-  height: 100px;
-  width: 100%;
-`;
+  // @todo: get auth status
+  const isAuthenticated = false;
 
-export default function Header() {
+  const handleSignIn = () => navigate('/sign-in');
+
+  const handleCreate = () => navigate('/entries/create');
+
   return (
-    <div>
+    <Container>
       <Heading>
-        <h1>ReliefSupports</h1>
+        <LogoWrapper>
+          <h1>ReliefSupports</h1>
+        </LogoWrapper>
 
-        <select>
-          <option>En</option>
-          <option>Si</option>
-          <option>Ta</option>
-        </select>
+        <HeaderActions>
+          <Select>
+            <option>En</option>
+            <option>Si</option>
+            <option>Ta</option>
+          </Select>
 
-        <SignInButton>Sign In</SignInButton>
+          <CreateButton onClick={handleCreate}>
+            <PlusIcon /> New Entry
+          </CreateButton>
+          <AuthButton onClick={handleSignIn}>
+            {isAuthenticated ? 'Sign Out' : 'Sign In'}
+          </AuthButton>
+        </HeaderActions>
       </Heading>
-      <HeaderImage />
-    </div>
+
+      {banner && <HeaderImage />}
+    </Container>
   );
 }

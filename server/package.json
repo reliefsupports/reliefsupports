@@ -1,21 +1,51 @@
 {
-  "name": "server",
+  "name": "reliefsupports-api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "./build/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon"
+    "start": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/index.js",
+    "prestart:prod": "npm run build",
+    "start:prod": "cross-env NODE_ENV=production node ./build/index.js",
+    "prebuild": "rm -rf build",
+    "build": "babel ./src --out-dir build --copy-files",
+    "lint": "eslint 'src/**/*.js'",
+    "lint:fix": "npm run lint -- --fix",
+    "format": "prettier --write 'src/**/*.js'"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "nodemonConfig": {
+    "ignore": [
+      "build/*"
+    ]
+  },
+  "author": "thinkholic",
+  "license": "none",
   "dependencies": {
-    "express": "^4.17.3",
-    "nodemon": "^2.0.15",
+    "bcrypt": "^5.0.1",
+    "core-js": "^3.15.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
-    "mongoose": "^6.0.10",
-    "node-fetch": "^3.0.0"
+    "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.8",
+    "morgan": "^1.10.0",
+    "regenerator-runtime": "^0.13.7",
+    "xss-clean": "^0.1.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.0",
+    "@babel/core": "^7.13.1",
+    "@babel/node": "^7.13.0",
+    "@babel/preset-env": "^7.13.5",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-babel-module": "^5.3.1",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.4.0",
+    "nodemon": "^2.0.7",
+    "prettier": "^2.3.1"
   }
 }
