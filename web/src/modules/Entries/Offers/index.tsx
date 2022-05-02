@@ -4,44 +4,31 @@ import dayjs from 'dayjs';
 
 import { fetchOffers as apiFetchOffers } from 'api/entries';
 
-import { IEntry } from 'types';
+import Filters from 'modules/Filters';
+import EntryList from 'components/Entry/List';
+import Pagination from 'components/Pagination';
 
-import {
-  Filters,
-  SearchInput,
-  Select,
-  List,
-  Row,
-  ColId,
-  ColType,
-  ColDesc,
-  ColPriority,
-  ColStatus,
-  Desc,
-  Meta,
-  DateTime,
-  Author,
-  Location,
-  Pagination,
-} from './styled';
+import { IEntry } from 'types';
 
 export const toReadableDate = (dateStr: string) => {
   return dayjs(dateStr).format('MMM DD, YYYY HH:mm');
 };
 
-export default function Offers() {
+export default function Requests() {
   const navigate = useNavigate();
 
   const [requests, setRequests] = useState<any>([]);
-  const [requestsFiltered, setRequestsFiltered] = useState<any>([]);
-  const [type, setType] = useState('');
-  const [priority, setPriority] = useState('');
+  const [offersFiltered, setOfferstsFiltered] = useState<any>([]);
+
   const [keyword, setKeyword] = useState('');
+  const [category, setCategory] = useState('');
+  const [priority, setPriority] = useState('');
+  const [status, setStatus] = useState('Active');
 
   const fetchOffers = async () => {
     const _requests = await apiFetchOffers();
     setRequests(_requests);
-    setRequestsFiltered(_requests);
+    setOfferstsFiltered(_requests);
   };
 
   useEffect(() => {
@@ -60,7 +47,7 @@ export default function Offers() {
 
       return found;
     });
-    setRequestsFiltered(_requests);
+    setOfferstsFiltered(_requests);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [keyword]);
@@ -71,21 +58,21 @@ export default function Offers() {
     const _requests = requests.filter((request: any) => {
       return priority === request.priority;
     });
-    setRequestsFiltered(_requests);
+    setOfferstsFiltered(_requests);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [priority]);
 
   useEffect(() => {
-    if (!type) return;
+    if (!category) return;
 
     const _requests = requests.filter((request: any) => {
-      return type === request.type;
+      return category === request.category;
     });
-    setRequestsFiltered(_requests);
+    setOfferstsFiltered(_requests);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [type]);
+  }, [category]);
 
   const handleClick = (entry: IEntry) =>
     navigate(`entries/${entry.id}`, { state: entry });
@@ -93,82 +80,19 @@ export default function Offers() {
   return (
     <div>
       <div>
-        <Filters>
-          <label>Search:</label>
-          <SearchInput
-            type="text"
-            placeholder="eg. Vitamin-C"
-            value={keyword}
-            onChange={(evt: any) => setKeyword(evt.target.value)}
-          />
+        <Filters
+          keyword={keyword}
+          category={category}
+          priority={priority}
+          status={status}
+          onChangeKeyword={setKeyword}
+          onChangeCategory={setCategory}
+          onChangePriority={setPriority}
+          onChangeStatus={setStatus}
+        />
 
-          <label>Category:</label>
-          <Select
-            options={[
-              { value: 'Medicine', label: 'Medicine' },
-              { value: 'Other', label: 'Other' },
-            ]}
-            defaultValue={type}
-            onChange={({ value }: any) => setType(value)}
-          />
-
-          <label>Priority:</label>
-          <Select
-            options={[
-              { value: 'High', label: 'High' },
-              { value: 'Medium', label: 'Medium' },
-              { value: 'Low', label: 'Low' },
-            ]}
-            defaultValue={priority}
-            onChange={({ value }: any) => setPriority(value)}
-          />
-        </Filters>
-
-        <List>
-          {requestsFiltered.map((entry: IEntry) => {
-            const {
-              id,
-              category,
-              summary,
-              body,
-              lastUpdatedAt,
-              postedBy,
-              priority,
-              location,
-              status,
-            } = entry;
-            return (
-              <Row key={id} onClick={() => handleClick(entry)}>
-                <ColType category={category}>{category}</ColType>
-                <ColId>{id}</ColId>
-                <ColDesc>
-                  <h4>{summary}</h4>
-                  <Desc dangerouslySetInnerHTML={{ __html: body }} />
-                  <Meta>
-                    <Location>{`At ${location.city} `}</Location>
-                    &bull;
-                    <DateTime>{` ${toReadableDate(lastUpdatedAt)} `}</DateTime>
-                    &bull;
-                    <Author>
-                      {` by ${postedBy.name}`}{' '}
-                      {postedBy.orgnization && (
-                        <span>{` on behalf of ${postedBy.orgnization}`}</span>
-                      )}
-                    </Author>
-                  </Meta>
-                </ColDesc>
-                <ColPriority>Priority:{priority}</ColPriority>
-                <ColStatus>{status}</ColStatus>
-              </Row>
-            );
-          })}
-        </List>
-
-        <Pagination>
-          <p>&laquo; Prev</p>
-          <p>|</p>
-          <p>Next &raquo;</p>
-        </Pagination>
+        <EntryList entries={offersFiltered} onClick={handleClick} />
+        <Pagination />
       </div>
     </div>
   );

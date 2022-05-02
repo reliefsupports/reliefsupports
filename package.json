@@ -1,8 +1,13 @@
 {
+  "private": true,
   "name": "reliefsupports",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "1.0.0-alpha.0",
+  "description": "Relief Supports is an open source project to support for volunteers' work in relief activities",
+  "workspaces": [
+    "server",
+    "web",
+    "strapi"
+  ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,13 +15,11 @@
     "type": "git",
     "url": "git+https://github.com/reliefsupports/reliefsupports.git"
   },
-  "author": "",
+  "author": "ReliefSupports Inititative - Sri Lanka",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/reliefsupports/reliefsupports/issues"
   },
   "homepage": "https://github.com/reliefsupports/reliefsupports#readme",
-  "dependencies": {
-    "pg": "^8.7.3"
-  }
+  "dependencies": {}
 }

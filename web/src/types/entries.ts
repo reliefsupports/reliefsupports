@@ -8,7 +8,7 @@ export enum Category {
   Other = 'Other',
 }
 
-enum Status {
+export enum Status {
   Active = 'Active',
   Resolved = 'Resolved',
   Archived = 'Archived',

@@ -7,7 +7,6 @@ import {
   HeaderActions,
   CreateButton,
   AuthButton,
-  Select,
   HeaderImage,
   PlusIcon,
 } from './styled';
@@ -30,11 +29,11 @@ export default function Header({ banner = false }: any) {
         </LogoWrapper>
 
         <HeaderActions>
-          <Select>
+          {/* <Select>
             <option>En</option>
             <option>Si</option>
             <option>Ta</option>
-          </Select>
+          </Select> */}
 
           <CreateButton onClick={handleCreate}>
             <PlusIcon /> New Entry

@@ -34,10 +34,10 @@ export const AuthButton = styled(Button)`
   color: #fff;
 `;
 
-export const Select = styled.select`
-  outline: none;
-  font-weight: bold;
-`;
+// export const Select = styled.select`
+//   outline: none;
+//   font-weight: bold;
+// `;
 
 export const HeaderImage = styled.div`
   background-color: #e5e5e5;

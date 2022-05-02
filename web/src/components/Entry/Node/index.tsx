@@ -1,30 +1,10 @@
+import dayjs from 'dayjs';
 import styled from 'styled-components';
-import ReactSelect from 'react-select';
 
 const colorSchemes: any = {
   Medicine: 'red',
   Other: 'black',
 };
-
-export const Filters = styled.div`
-  padding: 5px 0;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 10px;
-`;
-
-export const SearchInput = styled.input`
-  border: 1px solid #ccc;
-  padding: 8px 12px;
-  border-radius: 5px;
-  outline: none;
-  width: 300px;
-`;
-
-export const Select = styled(ReactSelect)`
-  width: 150px;
-`;
 
 export const List = styled.div`
   display: flex;
@@ -83,8 +63,42 @@ export const Author = styled.span``;
 
 export const Location = styled.span``;
 
-export const Pagination = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-`;
+export const toReadableDate = (dateStr: string) => {
+  return dayjs(dateStr).format('MMM DD, YYYY HH:mm');
+};
+
+export default function EntryNode({ entry, onClick }: any) {
+  const {
+    id,
+    category,
+    summary,
+    body,
+    lastUpdatedAt,
+    postedBy,
+    priority,
+    status,
+  } = entry;
+
+  return (
+    <Row onClick={() => onClick(entry)}>
+      <ColType category={category}>{category}</ColType>
+      <ColId>{id}</ColId>
+      <ColDesc>
+        <h4>{summary}</h4>
+        <Desc dangerouslySetInnerHTML={{ __html: body }} />
+        <Meta>
+          <DateTime>{`At ${toReadableDate(lastUpdatedAt)} `}</DateTime>
+          &bull;
+          <Author>
+            {` by ${postedBy.name}`}{' '}
+            {postedBy.orgnization && (
+              <span>{` on behalf of ${postedBy.orgnization}`}</span>
+            )}
+          </Author>
+        </Meta>
+      </ColDesc>
+      <ColPriority>Priority:{priority}</ColPriority>
+      <ColStatus>{status}</ColStatus>
+    </Row>
+  );
+}
