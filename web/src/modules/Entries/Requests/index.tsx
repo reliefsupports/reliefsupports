@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 
-import { fetchRequests as apiFetchRequests } from 'api/entries';
+import { fetch as apiFetchRequests } from 'api/entries';
 
 import Filters from 'modules/Filters';
 import EntryList from 'components/Entry/List';
@@ -26,7 +26,9 @@ export default function Requests() {
   const [status, setStatus] = useState('Active');
 
   const fetchRequests = async () => {
-    const _requests = await apiFetchRequests();
+    const _requests = await apiFetchRequests({
+      type: 'Request',
+    });
     setRequests(_requests);
     setRequestsFiltered(_requests);
   };
