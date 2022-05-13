@@ -5,9 +5,14 @@ import Providers from 'providers';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { init as httpInit } from 'utils/http';
+
+httpInit();
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <Providers>

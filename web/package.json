@@ -15,8 +15,10 @@
     "@types/qs": "^6.9.7",
     "@types/react": "^18.0.5",
     "@types/react-dom": "^18.0.1",
+    "axios": "^0.27.2",
     "dayjs": "^1.11.1",
     "formik": "^2.2.9",
+    "json-server": "^0.17.0",
     "lodash": "^4.17.21",
     "qs": "^6.10.3",
     "react": "^18.0.0",
@@ -33,7 +35,9 @@
     "styled-components": "^5"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"yarn start:web\" \"yarn start:api\"",
+    "start:web": "react-scripts start",
+    "start:api": "json-server --watch api.json --port 3001 --routes routes.json",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -57,6 +61,7 @@
     ]
   },
   "devDependencies": {
-    "@types/styled-components": "^5.1.25"
+    "@types/styled-components": "^5.1.25",
+    "concurrently": "^7.1.0"
   }
 }

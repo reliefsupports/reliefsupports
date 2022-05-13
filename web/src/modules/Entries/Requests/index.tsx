@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 
-import { fetchRequests as apiFetchRequests } from 'api/entries';
+import { fetch as apiFetchRequests } from 'api/entries';
 
 import { IEntry } from 'types';
 
@@ -38,7 +38,9 @@ export default function Requests() {
   const [keyword, setKeyword] = useState('');
 
   const fetchRequests = async () => {
-    const _requests = await apiFetchRequests();
+    const _requests = await apiFetchRequests({
+      type: 'Request',
+    });
     setRequests(_requests);
     setRequestsFiltered(_requests);
   };
