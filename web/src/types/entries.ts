@@ -20,7 +20,7 @@ export enum Priority {
   Low = 'Low',
 }
 
-export type User = {
+export type Author = {
   name: string;
   phone: string;
   avatarUrl?: string;
@@ -39,7 +39,7 @@ export interface IEntry {
   body: string;
   createdAt: string;
   lastUpdatedAt: string;
-  postedBy: User;
+  author: Author;
   status: Status.Active | Status.Resolved | Status.Resolved;
   priority: Priority.High | Priority.Medium | Priority.Low;
   location: Location;

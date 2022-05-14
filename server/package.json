@@ -16,6 +16,7 @@
     "lodash": "^4.17.20",
     "mongoose": "^5.10.11",
     "nodemon": "^2.0.5",
+    "short-unique-id": "^4.4.4",
     "uniqid": "^5.2.0"
   },
   "devDependencies": {

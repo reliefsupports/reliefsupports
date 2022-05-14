@@ -27,7 +27,7 @@ export default function Requests() {
 
   const fetchRequests = async () => {
     const _requests = await apiFetchRequests({
-      type: 'Request',
+      type: 'request',
     });
     setRequests(_requests);
     setRequestsFiltered(_requests);

@@ -8,8 +8,10 @@ const apiRoutes = require('./routes/api');
 const apiEntries = require('./routes/entries');
 
 const config = require('./config');
+const port = '3001';
 
 const app = express();
+
 app.use(cors());
 app.use(
   bodyParser.urlencoded({
@@ -34,8 +36,8 @@ const serve = async () => {
         res.sendFile(path.join(__dirname, 'public', 'index.html'));
       });
 
-      app.listen(process.env.PORT || 3001, () => {
-        console.log(`Listening on port 3001`);
+      app.listen(port, () => {
+        console.log(`Listening on port ${port}`);
       });
     },
     (error) => {

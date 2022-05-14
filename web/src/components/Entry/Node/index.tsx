@@ -2,8 +2,8 @@ import dayjs from 'dayjs';
 import styled from 'styled-components';
 
 const colorSchemes: any = {
-  Medicine: 'red',
-  Other: 'black',
+  medicine: 'red',
+  other: 'black',
 };
 
 export const List = styled.div`
@@ -28,9 +28,7 @@ export const Col = styled.div`
   padding: 5px 10px;
 `;
 
-export const ColId = styled(Col)`
-  width: 10px;
-`;
+export const ColId = styled(Col)``;
 
 export const ColType = styled(Col)<{ category: string }>`
   padding: 0;
@@ -68,13 +66,14 @@ export const toReadableDate = (dateStr: string) => {
 };
 
 export default function EntryNode({ entry, onClick }: any) {
+  console.log(entry);
   const {
     id,
     category,
     summary,
     body,
     lastUpdatedAt,
-    postedBy,
+    author,
     priority,
     status,
   } = entry;
@@ -90,9 +89,9 @@ export default function EntryNode({ entry, onClick }: any) {
           <DateTime>{`At ${toReadableDate(lastUpdatedAt)} `}</DateTime>
           &bull;
           <Author>
-            {` by ${postedBy.name}`}{' '}
-            {postedBy.orgnization && (
-              <span>{` on behalf of ${postedBy.orgnization}`}</span>
+            {` by ${author.name}`}{' '}
+            {author.orgnization && (
+              <span>{` on behalf of ${author.orgnization}`}</span>
             )}
           </Author>
         </Meta>
