@@ -7,9 +7,10 @@ import createError from 'http-errors';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
 import { mongoUrl, port } from 'config';
-import requestRoutes from './modules/requests/routes/requests-routes';
 import logger from './lib/logger';
 import { LOGGER } from './lib/constants';
+
+import requestRoutes from './modules/requests/routes/requests-routes';
 
 mongoose
   .connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
