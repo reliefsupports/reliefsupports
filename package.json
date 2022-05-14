@@ -9,7 +9,9 @@
     "strapi"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npx concurrently \"yarn start:web\" \"yarn start:server\"",
+    "start:web": "cd web && yarn start:web",
+    "start:server": "cd server && yarn start"
   },
   "repository": {
     "type": "git",

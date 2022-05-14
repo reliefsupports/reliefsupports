@@ -1,6 +1,11 @@
-import Entry from 'models/Entry';
+const express = require('express');
 
-export async function get(req, res) {
+const router = express.Router();
+
+const Entry = require('../modals/entry');
+
+// @todo: validate
+router.get('/', async (req, res) => {
   try {
     const entries = await Entry.find({});
     return res.status(200).json({
@@ -13,11 +18,11 @@ export async function get(req, res) {
       error: 'Internal Server Error!',
     });
   }
-}
+});
 
-export async function getSingle(req, res) {
+router.get('/:id', async (req, res) => {
   try {
-    const entry = await Entry.findOne({ _id: req.params.id });
+    const entry = await Entry.findOne({ id: req.params.id });
     return res.status(200).json({
       code: 200,
       message: entry,
@@ -28,19 +33,13 @@ export async function getSingle(req, res) {
       error: 'Internal Server Error!',
     });
   }
-}
+});
 
-export async function post(req, res) {
+router.post('/', async (req, res) => {
   try {
-    const { title, description, endAt, notifyAt } = req.body;
+    const body = req.body;
 
-    const entry = new Entry({
-      title,
-      description,
-      endAt: new Date(endAt),
-      notifyAt: new Date(notifyAt),
-      isCompleted: false,
-    });
+    const entry = new Entry(body);
     await entry.save();
     return res.status(200).json({
       code: 200,
@@ -52,32 +51,20 @@ export async function post(req, res) {
       error: 'Internal Server Error!',
     });
   }
-}
+});
 
-export async function patch(req, res) {
+router.patch('/:id', async (req, res) => {
   try {
     const entry = await Entry.findOne({ _id: req.params.id });
 
-    const { title, description, endAt, notifyAt, isCompleted } = req.body;
+    const { summary, body } = req.body;
 
-    if (title) {
-      entry.title = title;
+    if (summary) {
+      entry.summary = summary;
     }
 
-    if (description) {
-      entry.description = description;
-    }
-
-    if (endAt) {
-      entry.endAt = new Date(endAt);
-    }
-
-    if (notifyAt) {
-      entry.notifyAt = new Date(notifyAt);
-    }
-
-    if (isCompleted) {
-      entry.isCompleted = !!isCompleted;
+    if (body) {
+      entry.description = body;
     }
 
     await entry.save();
@@ -91,9 +78,9 @@ export async function patch(req, res) {
       error: 'Internal Server Error!',
     });
   }
-}
+});
 
-export async function remove(req, res) {
+router.delete('/:id', async (req, res) => {
   try {
     const { id } = req.params;
     await Entry.deleteOne({ _id: req.params.id });
@@ -109,4 +96,6 @@ export async function remove(req, res) {
       error: 'Internal Server Error!',
     });
   }
-}
+});
+
+module.exports = router;

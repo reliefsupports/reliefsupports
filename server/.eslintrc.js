@@ -1,23 +1,19 @@
 module.exports = {
   env: {
+    node: true,
+    commonjs: true,
     es2021: true,
   },
-  extends: ['airbnb-base', 'prettier'],
+  extends: ['standard', 'prettier'],
   plugins: ['prettier'],
   parserOptions: {
     ecmaVersion: 12,
-    sourceType: 'module',
+  },
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
   },
   rules: {
-    'import/prefer-default-export': 'off',
-    'func-names': 'off',
-    'no-underscore-dangle': 'off',
     'prettier/prettier': 'error',
   },
-  settings: {
-    'import/resolver': {
-      'babel-module': {},
-    },
-  },
-  ignorePatterns: ['cypress', 'www.js'],
 };
