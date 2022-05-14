@@ -1,0 +1,452 @@
+{
+	"info": {
+		"_postman_id": "3cf98562-a44f-450a-9d0e-b49772a08f34",
+		"name": "ReliefSupports-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /entries",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/entries?type=request",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"entries"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "request"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET /entries",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/entries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"entries"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "513"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"201-fRKjaWPHfJrzKS0E6PTkaVtV+d4\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 May 2022 16:57:13 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"message\": [\n        {\n            \"status\": \"draft\",\n            \"isVerified\": false,\n            \"externalSource\": null,\n            \"_id\": \"627fdf512877b6355995b50b\",\n            \"id\": \"ULYy\",\n            \"type\": \"request\",\n            \"category\": \"medicine\",\n            \"summary\": \"Vitamin-C wanted at Nawala\",\n            \"body\": \"<p>Urgently need a few packs of Vitamin-C. My contact number 071111111.<p>\",\n            \"author\": {\n                \"avatarUrl\": null,\n                \"orgnization\": null,\n                \"name\": \"John Doe\",\n                \"phone\": \"+94711111111\"\n            },\n            \"priority\": \"high\",\n            \"location\": {\n                \"city\": \"Colombo\"\n            },\n            \"createdAt\": \"2022-05-14T16:56:49.014Z\",\n            \"updatedAt\": \"2022-05-14T16:56:49.014Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "GET /entries/:id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/entries/ULYy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"entries",
+						"ULYy"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "GET /entries/:id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/entries/ULYy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"entries",
+								"ULYy"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "511"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1ff-VKH8bBWnJRYeKvzbR6Lfno20I78\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 May 2022 16:57:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"message\": {\n        \"status\": \"draft\",\n        \"isVerified\": false,\n        \"externalSource\": null,\n        \"_id\": \"627fdf512877b6355995b50b\",\n        \"id\": \"ULYy\",\n        \"type\": \"request\",\n        \"category\": \"medicine\",\n        \"summary\": \"Vitamin-C wanted at Nawala\",\n        \"body\": \"<p>Urgently need a few packs of Vitamin-C. My contact number 071111111.<p>\",\n        \"author\": {\n            \"avatarUrl\": null,\n            \"orgnization\": null,\n            \"name\": \"John Doe\",\n            \"phone\": \"+94711111111\"\n        },\n        \"priority\": \"high\",\n        \"location\": {\n            \"city\": \"Colombo\"\n        },\n        \"createdAt\": \"2022-05-14T16:56:49.014Z\",\n        \"updatedAt\": \"2022-05-14T16:56:49.014Z\",\n        \"__v\": 0\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "POST /entries",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"request\",\n    \"category\": \"medicine\",\n    \"summary\": \"Vitamin-C wanted at Nawala\",\n    \"body\": \"<p>Urgently need a few packs of Vitamin-C. My contact number 071111111.<p>\",\n    \"author\": {\n        \"name\": \"John Doe\",\n        \"phone\": \"+94711111111\",\n        \"avatarUrl\": null,\n        \"orgnization\": null\n    },\n    \"priority\": \"high\",\n    \"location\": {\n        \"city\": \"Colombo\"\n    },\n    \"externalSource\": null\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/entries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"entries"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "POST /entries",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"request\",\n    \"category\": \"medicine\",\n    \"summary\": \"Vitamin-C wanted at Nawala\",\n    \"body\": \"<p>Urgently need a few packs of Vitamin-C. My contact number 071111111.<p>\",\n    \"author\": {\n        \"name\": \"John Doe\",\n        \"phone\": \"+94711111111\",\n        \"avatarUrl\": null,\n        \"orgnization\": null\n    },\n    \"priority\": \"high\",\n    \"location\": {\n        \"city\": \"Colombo\"\n    },\n    \"externalSource\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/entries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"entries"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "511"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1ff-VKH8bBWnJRYeKvzbR6Lfno20I78\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 May 2022 16:56:49 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"message\": {\n        \"status\": \"draft\",\n        \"isVerified\": false,\n        \"externalSource\": null,\n        \"_id\": \"627fdf512877b6355995b50b\",\n        \"id\": \"ULYy\",\n        \"type\": \"request\",\n        \"category\": \"medicine\",\n        \"summary\": \"Vitamin-C wanted at Nawala\",\n        \"body\": \"<p>Urgently need a few packs of Vitamin-C. My contact number 071111111.<p>\",\n        \"author\": {\n            \"avatarUrl\": null,\n            \"orgnization\": null,\n            \"name\": \"John Doe\",\n            \"phone\": \"+94711111111\"\n        },\n        \"priority\": \"high\",\n        \"location\": {\n            \"city\": \"Colombo\"\n        },\n        \"createdAt\": \"2022-05-14T16:56:49.014Z\",\n        \"updatedAt\": \"2022-05-14T16:56:49.014Z\",\n        \"__v\": 0\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "PATCH /entries/:id",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"summary\": \"Vitamin-C wanted at Nawala (edited)\",\n    \"body\": \"<p>Urgently need a few packs of Vitamin-C. My contact number 071111111.<p> (edited)\",\n    \"priority\": \"low\",\n    \"status\": \"published\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/entries/ULYy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"entries",
+						"ULYy"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "PATCH /entries/:id",
+					"originalRequest": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"summary\": \"Vitamin-C wanted at Nawala (edited)\",\n    \"body\": \"<p>Urgently need a few packs of Vitamin-C. My contact number 071111111.<p> (edited)\",\n    \"priority\": \"low\",\n    \"status\": \"published\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/entries/ULYy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"entries",
+								"ULYy"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "532"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"214-sJM1THq1vFtUJstjptuk4cyPGpA\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 May 2022 16:58:09 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"message\": {\n        \"status\": \"published\",\n        \"isVerified\": false,\n        \"externalSource\": null,\n        \"_id\": \"627fdf512877b6355995b50b\",\n        \"id\": \"ULYy\",\n        \"type\": \"request\",\n        \"category\": \"medicine\",\n        \"summary\": \"Vitamin-C wanted at Nawala (edited)\",\n        \"body\": \"<p>Urgently need a few packs of Vitamin-C. My contact number 071111111.<p> (edited)\",\n        \"author\": {\n            \"avatarUrl\": null,\n            \"orgnization\": null,\n            \"name\": \"John Doe\",\n            \"phone\": \"+94711111111\"\n        },\n        \"priority\": \"low\",\n        \"location\": {\n            \"city\": \"Colombo\"\n        },\n        \"createdAt\": \"2022-05-14T16:56:49.014Z\",\n        \"updatedAt\": \"2022-05-14T16:58:09.943Z\",\n        \"__v\": 0\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "DELETE /entries/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/api/entries/ULYy",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"entries",
+						"ULYy"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "DELETE /entries/:id",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/api/entries/ULYy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"entries",
+								"ULYy"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "36"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"24-WMjwNmSyvwKwVa/bcC+HCKhGUjw\""
+						},
+						{
+							"key": "Date",
+							"value": "Sat, 14 May 2022 16:58:29 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"code\": 200,\n    \"message\": {\n        \"id\": \"ULYy\"\n    }\n}"
+				}
+			]
+		}
+	]
+}
