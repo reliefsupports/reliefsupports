@@ -15,7 +15,7 @@ const requestInterceptor = (req: any) => {
 };
 
 const responseInterceptor = (res: any) => {
-  return res.data;
+  return res.data?.message;
 };
 
 export const init = () => {
