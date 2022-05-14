@@ -84,6 +84,10 @@ Priorities:
 - `priority:medium`
 - `priority:low`
 
+#### API Docs
+
+Check [postman collection](/server/ReliefSupports-API.postman_collection.json)
+
 ## License
 
 MIT
