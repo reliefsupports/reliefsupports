@@ -29,6 +29,61 @@ yarn start // will start server and web at once
 
 > Frontend on [::3000](http://localhost:3000) and Backend [::3001/api](http://localhost:3001/api)
 
+#### Guidelines
+
+- Primary branch is `master`, and strongly recommend to avoid pushing changes to `master` branch directly.
+- Follow proper naming conventions always
+- Alyways put active WIP PRs in draft stage
+
+##### Branch names
+
+- Use `feat/<awasome-feature>-[issue-id]` naming conventions for feature branches
+- Use `fix/<good-fix>-[issue-id]` for bug fixes
+- Use `chore/<task>-[issue-id]` for regular tasks
+
+##### PR naming
+
+- Use `feat: <My Awesome Feature>` naming conventions for feature titles
+- Use `fix: <That fix>` for fixes
+- Use `chore: <Regular Task>` for regular tasks
+
+##### Commit messages
+
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+
+##### Issues
+
+Apply labels appropriately for each issues when created:
+
+- `epic`
+- `story`
+- `bug`
+- `feature`
+- `feature-request`
+- `enhancement`
+- `documentation`
+- `question`
+- `help wanted`
+
+Components:
+
+- `comp:frontend`
+- `comp:server`
+
+Labels for maintainers:
+
+- `wontfix`
+- `invalid`
+- `good first issue`
+- `duplicate`
+- `freez`
+
+Priorities:
+
+- `priority:high`
+- `priority:medium`
+- `priority:low`
+
 ## License
 
 MIT
