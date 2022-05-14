@@ -9,10 +9,15 @@ const Entry = require('../modals/entry');
 
 // @todo: [improvements] move handlers into separate files
 
-// ::entries.get
+// ::entries.get(?type=request)
 router.get('/', async (req, res) => {
   try {
-    const entries = await Entry.find({});
+    const query = {};
+
+    const type = req.query.type;
+    if (type) query.type = type;
+
+    const entries = await Entry.find(query);
     return res.status(200).json({
       code: 200,
       message: entries,
