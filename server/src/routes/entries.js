@@ -3,7 +3,9 @@ const ShortUniqueId = require('short-unique-id');
 const pick = require('lodash/pick');
 
 const router = express.Router();
-const uid = new ShortUniqueId();
+const uid = new ShortUniqueId({
+  dictionary: 'alphanum_upper',
+});
 
 const Entry = require('../modals/entry');
 
