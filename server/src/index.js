@@ -1,5 +1,46 @@
-#!/user/bin/env node
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
+const express = require('express');
+const bodyParser = require('body-parser');
+const path = require('path');
+const cors = require('cors');
+const mongoose = require('mongoose');
 
-import './server';
+const apiRoutes = require('./routes/api');
+const apiEntries = require('./routes/entries');
+
+const config = require('./config');
+
+const app = express();
+app.use(cors());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
+app.use(bodyParser.json());
+
+// connect to mongoose
+const options = { useNewUrlParser: true, useUnifiedTopology: true };
+const mongo = mongoose.connect(config.mongoUrl, options);
+
+const serve = async () => {
+  mongo.then(
+    () => {
+      app.use(express.static(path.join(__dirname, 'public')));
+
+      app.use('/api', apiRoutes);
+      app.use('/api/entries', apiEntries);
+
+      app.get('/*', function (req, res) {
+        res.sendFile(path.join(__dirname, 'public', 'index.html'));
+      });
+
+      app.listen(process.env.PORT || 3001, () => {
+        console.log(`Listening on port 3001`);
+      });
+    },
+    (error) => {
+      console.log(error, 'error');
+    }
+  );
+};
+serve();

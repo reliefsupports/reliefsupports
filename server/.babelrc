@@ -1,18 +1,14 @@
 {
-  "presets": [["@babel/preset-env", { "targets": { "node": "current" } }]],
+  "presets": ["env", "es2015", "stage-0"],
   "plugins": [
+    "transform-es2015-destructuring",
+    "transform-object-rest-spread",
     [
-      "module-resolver",
+      "transform-runtime",
       {
-        "alias": {
-          "config": "./src/config",
-          "middlewares": "./src/middlewares",
-          "routes": "./src/routes",
-          "utils": "./src/utils",
-          "models": "./src/models",
-          "handlers": "./src/handlers"
-        }
+        "regenerator": true
       }
     ]
-  ]
+  ],
+  "ignore": ["public/*"]
 }

@@ -1,51 +1,46 @@
 {
-  "name": "reliefsupports-api",
-  "version": "1.0.0",
-  "main": "./build/index.js",
+  "name": "reliefsupports-server",
+  "version": "1.0.0-alpha.0",
+  "main": "src/index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=development nodemon --exec babel-node ./src/index.js",
-    "prestart:prod": "npm run build",
-    "start:prod": "cross-env NODE_ENV=production node ./build/index.js",
-    "prebuild": "rm -rf build",
-    "build": "babel ./src --out-dir build --copy-files",
-    "lint": "eslint 'src/**/*.js'",
-    "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --write 'src/**/*.js'"
+    "start": "nodemon src/index.js",
+    "build": "babel src -d build"
   },
-  "nodemonConfig": {
-    "ignore": [
-      "build/*"
-    ]
-  },
-  "author": "thinkholic",
-  "license": "none",
   "dependencies": {
-    "bcrypt": "^5.0.1",
-    "core-js": "^3.15.1",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "helmet": "^4.6.0",
+    "firebase-admin": "^9.2.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.13.8",
-    "morgan": "^1.10.0",
-    "regenerator-runtime": "^0.13.7",
-    "xss-clean": "^0.1.1"
+    "lodash": "^4.17.20",
+    "mongoose": "^5.10.11",
+    "nodemon": "^2.0.5",
+    "uniqid": "^5.2.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.13.0",
-    "@babel/core": "^7.13.1",
-    "@babel/node": "^7.13.0",
-    "@babel/preset-env": "^7.13.5",
-    "babel-plugin-module-resolver": "^4.1.0",
-    "cross-env": "^7.0.3",
-    "eslint": "^7.29.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-import-resolver-babel-module": "^5.3.1",
-    "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-prettier": "^3.4.0",
-    "nodemon": "^2.0.7",
-    "prettier": "^2.3.1"
-  }
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.1.0",
+    "babel-plugin-transform-es2015-destructuring": "^6.23.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "concurrently": "^5.3.0",
+    "eslint": "^7.11.0",
+    "eslint-config-prettier": "^6.13.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "prettier": "^2.1.2"
+  },
+  "license": "MIT"
 }
