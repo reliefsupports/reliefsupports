@@ -66,7 +66,6 @@ export const toReadableDate = (dateStr: string) => {
 };
 
 export default function EntryNode({ entry, onClick }: any) {
-  console.log(entry);
   const {
     id,
     category,
