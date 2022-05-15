@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 
 const apiRoutes = require('./routes/api');
 const apiEntries = require('./routes/entries');
+const apiUser = require('./routes/user');
 
 const config = require('./config');
 const port = '3001';
@@ -31,6 +32,7 @@ const serve = async () => {
 
       app.use('/api', apiRoutes);
       app.use('/api/entries', apiEntries);
+      app.use('/api/user', apiUser);
 
       app.get('/*', function (req, res) {
         res.sendFile(path.join(__dirname, 'public', 'index.html'));
