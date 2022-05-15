@@ -31,12 +31,12 @@ router.get('/', async (req, res) => {
     const keyword = req.query.search;
     if (keyword)
       query.$or = [
-        { summary: { $in: [keyword] } },
-        { body: { $in: [keyword] } },
+        { summary: new RegExp(keyword, 'i') },
+        { body: new RegExp(keyword, 'i') },
       ];
 
-    const offset = req.query.offset || 0;
-    const limit = req.query.offset || 20;
+    const limit = req.query.limit || 20;
+    const offset = req.query.page && req.query.page > 0 ? (req.query.page - 1) * limit : 0;
 
     const entries = await Entry.find(query).skip(offset).limit(limit);
     return res.status(200).json({

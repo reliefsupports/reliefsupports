@@ -9,11 +9,11 @@ export const Container = styled.div`
   margin: 30px 0;
 `;
 
-export default function Pagination() {
+export default function Pagination({page, handleChange}:any) {
   return (
     <Container>
       <Stack spacing={2}>
-        <PaginationMUI count={10} />
+        <PaginationMUI count={10}  page={page} onChange={handleChange}/>
       </Stack>
     </Container>
   );

@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 
-import { fetchOffers as apiFetchOffers } from 'api/entries';
+import { fetch as apiFetchRequests } from 'api/entries';
 
 import Filters from 'modules/Filters';
 import EntryList from 'components/Entry/List';
-import Pagination from 'components/Pagination';
 
 import { IEntry } from 'types';
 
@@ -17,62 +16,40 @@ export const toReadableDate = (dateStr: string) => {
 export default function Requests() {
   const navigate = useNavigate();
 
-  const [requests, setRequests] = useState<any>([]);
-  const [offersFiltered, setOfferstsFiltered] = useState<any>([]);
+  const [requestsFiltered, setRequestsFiltered] = useState<any>([]);
 
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState('');
   const [priority, setPriority] = useState('');
-  const [status, setStatus] = useState('Active');
+  const [status, setStatus] = useState('Published');
+  const [page, setPage] = useState(1);
 
-  const fetchOffers = async () => {
-    const _requests = await apiFetchOffers();
-    setRequests(_requests);
-    setOfferstsFiltered(_requests);
+  const fetchRequests = async (onPaginate = false) => {
+    let pageNumber = 1;
+    if (onPaginate) {
+      pageNumber = page + 1;
+      setPage(pageNumber);
+    }
+    const requestFilter = {
+      type: 'offer',
+      ...(category && { category: category.toLowerCase() }),
+      ...(priority && { priority: priority.toLowerCase() }),
+      ...(status && { status: status.toLowerCase() }),
+      ...(keyword && { search: keyword }),
+      ...(page && { page: pageNumber }),
+    };
+    const _requests = await apiFetchRequests(requestFilter);
+    setRequestsFiltered((data: any) => {
+      const response: any = _requests;
+      if (pageNumber === 1) return response;
+      return [...data, ...response];
+    });
   };
 
   useEffect(() => {
-    fetchOffers();
-  }, []);
-
-  useEffect(() => {
-    if (!keyword) return;
-
-    const _requests = requests.filter(({ summary, body }: any) => {
-      let found = false;
-
-      if (summary.toLowerCase().search(keyword.toLowerCase()) !== -1)
-        found = true;
-      if (body.toLowerCase().search(keyword.toLowerCase()) !== -1) found = true;
-
-      return found;
-    });
-    setOfferstsFiltered(_requests);
-
+    fetchRequests();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [keyword]);
-
-  useEffect(() => {
-    if (!priority) return;
-
-    const _requests = requests.filter((request: any) => {
-      return priority === request.priority;
-    });
-    setOfferstsFiltered(_requests);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [priority]);
-
-  useEffect(() => {
-    if (!category) return;
-
-    const _requests = requests.filter((request: any) => {
-      return category === request.category;
-    });
-    setOfferstsFiltered(_requests);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category]);
+  }, [keyword, priority, category, status]);
 
   const handleClick = (entry: IEntry) =>
     navigate(`entries/${entry.id}`, { state: entry });
@@ -91,8 +68,12 @@ export default function Requests() {
           onChangeStatus={setStatus}
         />
 
-        <EntryList entries={offersFiltered} onClick={handleClick} />
-        <Pagination />
+        <EntryList
+          entries={requestsFiltered}
+          onClick={handleClick}
+          onNext={() => fetchRequests(true)}
+        />
+        {/* <Pagination page={page} handleChange={({ value }: any)=>{setPage(value)}}/> */}
       </div>
     </div>
   );
