@@ -48,7 +48,7 @@ export default function ModalC(props: any) {
 
   React.useEffect(() => {
     if (props.method === 'update') {
-      console.log(props.id); // If 'update' pass document ID as prop
+      // console.log(props.id); // If 'update' pass document ID as prop
       //Todo : Get current data
       //Todo : Set values to states (district, priority, category, description)
     }
@@ -64,7 +64,6 @@ export default function ModalC(props: any) {
     };
     if (props.method === 'add') {
       // Todo : add document
-      console.log(data);
       // createDocumentAPI.createDocument(data);
     } else {
       // Todo : update document
