@@ -35,7 +35,7 @@ export default function Requests() {
       ...(category && { category: category.toLowerCase() }),
       ...(priority && { priority: priority.toLowerCase() }),
       ...(status && { status: status.toLowerCase() }),
-      ...(keyword && { keyword: keyword }),
+      ...(keyword && { search: keyword }),
       ...(page && { page: pageNumber }),
     };
     const _requests = await apiFetchRequests(requestFilter);
