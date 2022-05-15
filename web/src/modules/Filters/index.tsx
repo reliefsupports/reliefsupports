@@ -50,22 +50,25 @@ export default function Filters({
       <label>Category:</label>
       <Select
         options={toOptions(Object.values(Category))}
-        defaultValue={category}
-        onChange={({ value }: any) => onChangeCategory(value)}
+        defaultValue={category && toOptions([category])[0]}
+        onChange={(event: any) => onChangeCategory(event?.value)}
+        isClearable
       />
 
       <label>Priority:</label>
       <Select
         options={toOptions(Object.values(Priority))}
-        defaultValue={priority}
-        onChange={({ value }: any) => onChangePriority(value)}
+        defaultValue={priority && toOptions([priority])[0]}
+        onChange={(event: any) => onChangePriority(event?.value)}
+        isClearable
       />
 
       <label>Status:</label>
       <Select
         options={toOptions(Object.values(Status))}
-        defaultValue={status}
-        onChange={({ value }: any) => onChangeStatus(value)}
+        defaultValue={status && toOptions([status])[0]}
+        onChange={(event: any) => onChangeStatus(event?.value)}
+        isClearable
       />
     </Container>
   );

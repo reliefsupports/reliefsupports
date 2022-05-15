@@ -9,7 +9,9 @@ export enum Category {
 }
 
 export enum Status {
-  Active = 'Active',
+  Draft = 'Draft',
+  Published = 'Published',
+  Attended = 'Attended',
   Resolved = 'Resolved',
   Archived = 'Archived',
 }
@@ -40,7 +42,7 @@ export interface IEntry {
   createdAt: string;
   lastUpdatedAt: string;
   author: Author;
-  status: Status.Active | Status.Resolved | Status.Resolved;
+  status: Status.Draft | Status.Resolved | Status.Resolved;
   priority: Priority.High | Priority.Medium | Priority.Low;
   location: Location;
   isVerified: boolean;
