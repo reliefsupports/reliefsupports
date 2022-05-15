@@ -135,7 +135,7 @@ router.post('/', authMiddleware, async (req, res) => {
 //   return res.status(response.code).send(response);
 // });
 
-// ::user.put
+// ::user.patch
 router.patch('/:id', authMiddleware, async (req, res) => {
   try {
     // @todo: set req.user in the authMiddleware

@@ -19,7 +19,26 @@ router.get('/', async (req, res) => {
     const type = req.query.type;
     if (type) query.type = type;
 
-    const entries = await Entry.find(query);
+    const category = req.query.category;
+    if (category) query.category = category;
+
+    const status = req.query.status;
+    if (status) query.status = status;
+
+    const priority = req.query.priority;
+    if (priority) query.priority = priority;
+
+    const keyword = req.query.search;
+    if (keyword)
+      query.$or = [
+        { summary: { $in: [keyword] } },
+        { body: { $in: [keyword] } },
+      ];
+
+    const offset = req.query.offset || 0;
+    const limit = req.query.offset || 20;
+
+    const entries = await Entry.find(query).skip(offset).limit(limit);
     return res.status(200).json({
       code: 200,
       message: entries,
