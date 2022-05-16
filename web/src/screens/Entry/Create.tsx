@@ -32,7 +32,7 @@ export default function CreateEntry() {
           const errors: any = {};
           return errors;
         }}
-        onSubmit={async (values, { setSubmitting }) => {
+        onSubmit={async (values, { setSubmitting, resetForm }) => {
           setSubmitting(true);
           values.body= "<p>".concat(values.body,"</p>")
           const response = await apiCreateEntry({
@@ -53,7 +53,7 @@ export default function CreateEntry() {
           });
           if (response) {
             setSubmitting(false);
-            console.log(response);
+            resetForm();
           }
         }}
       >

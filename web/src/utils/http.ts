@@ -20,8 +20,6 @@ const responseInterceptor = (res: any) => {
 
 export const init = () => {
   axios.defaults.baseURL = apiBaseUrl;
-  axios.defaults.headers.post['content-Type'] = 'application/json';
-  axios.defaults.headers.post['X-Request-With'] = 'XMLHTTPRequest';
   axios.interceptors.request.use(requestInterceptor);
   axios.interceptors.response.use(responseInterceptor);
 };
