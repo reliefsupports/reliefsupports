@@ -75,6 +75,9 @@ router.get('/:id', async (req, res) => {
 // ::entries.post
 router.post('/', async (req, res) => {
   try {
+    console.log('====================================');
+    console.log(req.body);
+    console.log('====================================');
     const body = pick(req.body, [
       'type',
       'category',

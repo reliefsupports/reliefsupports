@@ -6,7 +6,9 @@ export const Input = styled.input`
   box-sizing: border-box;
   border-radius: 5px;
   padding: 10px 8px;
-  color: #a3a3a3;
+  color: #565555;
+  width: 100%;
+  height: 40px;
 `;
 
 export const Label = styled.label`

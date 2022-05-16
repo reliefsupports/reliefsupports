@@ -10,13 +10,31 @@ export const Label = styled.label`
   color: #000000;
 `;
 
-export default function Select({ name, label, options }: any) {
+export default function Select({
+  name,
+  label,
+  options,
+  value,
+  onChange,
+  onBlur,
+  error,
+  touched
+}: any) {
+  const defaultValue = (ops:any,val:string)=>{
+    return ops ? ops.find((op:any)=> op.value.toLowerCase() === val) : "";
+  }
   return (
     <div>
       <div>
         <Label htmlFor={name}>{label}</Label>
       </div>
-      <ReactSelect options={options} />
+      <ReactSelect
+        value={defaultValue(options, value)}
+        options={options}
+        onChange={(event: any) => onChange(event.value.toLowerCase())}
+        onBlur={() => onBlur(name, true)}
+      />
+      {error && touched && <span>{error}</span>}
     </div>
   );
 }

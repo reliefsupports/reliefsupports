@@ -1,4 +1,4 @@
-import { get } from 'utils/http';
+import { get, post } from 'utils/http';
 
 import entries from 'data/entries.json';
 
@@ -23,4 +23,8 @@ export async function fetch(query: any) {
   });
 
   return get(`/entries?${searchParams.toString()}`);
+}
+
+export async function create(entry:any) {
+  return post(`/entries`, entry);
 }
