@@ -18,9 +18,11 @@ const initialValues: any = {
   summary: '',
   body: '',
   priority: '',
+  city:''
 };
 
 export default function CreateEntry() {
+
   return (
     <PageLayout>
       <h1>Create Entry</h1>
@@ -32,7 +34,9 @@ export default function CreateEntry() {
         }}
         onSubmit={async (values, { setSubmitting }) => {
           setSubmitting(true);
+          values.body= "<p>".concat(values.body,"</p>")
           const response = await apiCreateEntry({
+            
             ...values,
             ...{
               author: {
@@ -41,6 +45,10 @@ export default function CreateEntry() {
                 avatarUrl: null,
                 orgnization: null,
               },
+              location:{
+                city: values.city
+              },
+              "externalSource": null
             },
           });
           if (response) {
@@ -61,6 +69,15 @@ export default function CreateEntry() {
           /* and other goodies */
         }) => (
           <form onSubmit={handleSubmit}>
+             <TextInput
+              name="city"
+              label="District"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              value={values.city}
+              error={errors.city}
+              touched={touched.city}
+            />
             <Select
               name="type"
               label="Type"
