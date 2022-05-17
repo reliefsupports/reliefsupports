@@ -2,9 +2,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import dayjs from 'dayjs';
 
-import MedicalIcon from 'assets/icons/medical';
 import VerifiedIcon from 'assets/icons/Verified';
-import CommentIcon from 'assets/icons/Comment';
 
 import { IEntry } from 'types';
 import PageLayout from 'layouts/PageLayout';
@@ -18,7 +16,6 @@ import {
   getCategory,
   getSummary,
   getOrganization,
-  IsVerified,
 } from 'utils/entries';
 
 import {
@@ -31,33 +28,13 @@ import {
   Label,
   Body,
   Phone,
-  Div,
-  Author,
-  InforBox,
-  Seperator,
-  Title,
-  Text,
-  StatusLabel,
-  Icon,
-  CommentsArea,
-  CommentsInput,
 } from './styled';
 
 export default function EntrySingle() {
   const location = useLocation();
-  const [showComments, setShowComments] = useState(false);
 
   const state = location.state as IEntry;
-  const { id, summary, createdAt, author } = state;
-
-  const onClick = () => {
-    setShowComments(true);
-  };
-
-  const onBlur = () => {
-    setShowComments(false);
-    // todo
-  };
+  const { id, createdAt, isVerified } = state;
 
   const showIcon = getCategory(state) === 'medicine' ? true : false;
 
@@ -71,15 +48,15 @@ export default function EntrySingle() {
 
         <Header>
           <Heading>
-            <ID>{id}</ID> - {summary}
+            <ID>{id}</ID> - {getSummary(state)} {isVerified && <VerifiedIcon />}
           </Heading>
           <Meta>
             At <span>{getDistrict(state)}</span>,{' '}
             {dayjs(createdAt).format('MMM DD, YYYY HH:mm')} &bull;{' '}
             <span>
-              {` by ${author.name}`}{' '}
-              {author.orgnization && (
-                <span>{` on behalf of ${author.orgnization}`} </span>
+              {` by ${getAuthorName(state)}`}{' '}
+              {getOrganization(state) && (
+                <span>{` on behalf of ${getOrganization(state)}`} </span>
               )}
             </span>
             &bull; <span>{getStatus(state)}</span>
@@ -89,15 +66,6 @@ export default function EntrySingle() {
         <Body dangerouslySetInnerHTML={{ __html: state.body }} />
 
         <Phone>Phone: {state.author.phone}</Phone>
-
-        {/* <CommentsArea onClick={onClick}>
-          <Icon>
-            {' '}
-            <CommentIcon />
-          </Icon>
-          <p> Comment</p>
-        </CommentsArea>
-        {showComments && <CommentsInput onBlur={onBlur} />} */}
       </Conatiner>
     </PageLayout>
   );
