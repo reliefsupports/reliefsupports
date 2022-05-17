@@ -8,14 +8,16 @@ import InfiniteScroll from 'react-infinite-scroll-component';
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 15px 0;
+  margin: 0;
   gap: 5px;
 `;
 
-export default function EntryList({ entries, onClick, onNext }: any) {
+export default function EntryList({ entries = [], onClick, onNext }: any) {
+  if (entries.length === 0) return <div>No entries.</div>;
+
   return (
     <InfiniteScroll
-      dataLength={(entries || []).length}
+      dataLength={entries.length}
       next={onNext}
       hasMore
       loader={<p></p>}

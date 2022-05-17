@@ -1,30 +1,68 @@
 import styled from 'styled-components';
 
-export const SingleEntryConatiner = styled.div`
+export const Conatiner = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 15px 0;
+  font-size: 14px;
 `;
+
+export const Header = styled.div`
+  padding: 15px 0 4px;
+  border-bottom: 1px solid #ccc;
+  margin: 0 0 10px;
+`;
+
+export const Heading = styled.h4`
+  text-transform: uppercase;
+`;
+
+export const ID = styled.span`
+  text-transform: uppercase;
+`;
+
+export const Meta = styled.div`
+  font-size: small;
+  color: #999;
+  line-height: 25px;
+`;
+
+export const Labels = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 8px;
+`;
+
+export const Label = styled.div`
+  background-color: black;
+  color: white;
+  font-size: 9px;
+  width: fit-content;
+  padding: 5px 19px;
+  border-radius: 5px;
+  text-transform: uppercase;
+`;
+
+export const Body = styled.div`
+  padding: 5px 0;
+`;
+
+export const Phone = styled.div``;
 
 export const Box = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: end;
 `;
+
 export const LabelRow = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 `;
-export const Label = styled.div`
-  background-color: black;
-  color: white;
-  font-size: 12px;
-  width: fit-content;
-  padding: 5px 19px;
-  border-radius: 5px;
-  margin: 10px;
-`;
+
 export const StatusLabel = styled.div`
   background-color: #e5e5e5;
   color: black;

@@ -1,11 +1,36 @@
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import dayjs from 'dayjs';
+
+import MedicalIcon from 'assets/icons/medical';
+import VerifiedIcon from 'assets/icons/Verified';
+import CommentIcon from 'assets/icons/Comment';
 
 import { IEntry } from 'types';
 import PageLayout from 'layouts/PageLayout';
+
 import {
-  SingleEntryConatiner,
+  getReqType,
+  getReqPriority,
+  getAuthorName,
+  getStatus,
+  getDistrict,
+  getCategory,
+  getSummary,
+  getOrganization,
+  IsVerified,
+} from 'utils/entries';
+
+import {
+  Conatiner,
+  Header,
+  Heading,
+  ID,
+  Meta,
+  Labels,
   Label,
+  Body,
+  Phone,
   Div,
   Author,
   InforBox,
@@ -17,26 +42,13 @@ import {
   CommentsArea,
   CommentsInput,
 } from './styled';
-import {
-  getReqType,
-  getReqPriority,
-  getAuthorName,
-  getStatus,
-  getDistrict,
-  getCategory,
-  getSummary,
-  getOrganization,
-  IsVerified,
-} from '../../utils/entries';
-
-import MedicalIcon from '../../assets/icons/medical';
-import VerifiedIcon from '../../assets/icons/Verified';
-import CommentIcon from '../../assets/icons/Comment';
 
 export default function EntrySingle() {
   const location = useLocation();
   const [showComments, setShowComments] = useState(false);
-  var state = location.state as IEntry;
+
+  const state = location.state as IEntry;
+  const { id, summary, createdAt, author } = state;
 
   const onClick = () => {
     setShowComments(true);
@@ -47,63 +59,46 @@ export default function EntrySingle() {
     // todo
   };
 
-  console.log(state);
   const showIcon = getCategory(state) === 'medicine' ? true : false;
+
   return (
     <PageLayout>
-      <SingleEntryConatiner>
-        <Div>
-          <Label>Type: {getReqType(state)}</Label>
-          <Label>Priority: {getReqPriority(state)}</Label>
-          {showIcon && (
-            <Icon>
-              <MedicalIcon />
-            </Icon>
-          )}
-        </Div>
-        <Div></Div>
-        <Div>
-          <Author>{getAuthorName(state)}</Author>
-          {IsVerified(state) && (
-            <Icon>
-              <VerifiedIcon />{' '}
-            </Icon>
-          )}
-          <Icon>
-            <p>{getOrganization(state)}</p>
-          </Icon>
-        </Div>
-        <Div>
-          <InforBox>
-            <Title>Category</Title>
-            <Text>{getCategory(state)}</Text>
-          </InforBox>
-          <Seperator />
-          <InforBox>
-            <Title>District</Title>
-            <Text>{getDistrict(state)}</Text>
-          </InforBox>
-          <Seperator />
-          <InforBox>
-            <Title>Status</Title>
-            <StatusLabel>{getStatus(state)}</StatusLabel>
-          </InforBox>
-        </Div>
+      <Conatiner>
+        <Labels>
+          <Label>{getReqType(state)}</Label>
+          <Label>{getReqPriority(state)}</Label>
+        </Labels>
 
-        <InforBox>
-          <Title>Looking For</Title>
-          <Text>{getSummary(state)}</Text>
-        </InforBox>
+        <Header>
+          <Heading>
+            <ID>{id}</ID> - {summary}
+          </Heading>
+          <Meta>
+            At <span>{getDistrict(state)}</span>,{' '}
+            {dayjs(createdAt).format('MMM DD, YYYY HH:mm')} &bull;{' '}
+            <span>
+              {` by ${author.name}`}{' '}
+              {author.orgnization && (
+                <span>{` on behalf of ${author.orgnization}`} </span>
+              )}
+            </span>
+            &bull; <span>{getStatus(state)}</span>
+          </Meta>
+        </Header>
 
-        <CommentsArea onClick={onClick}>
+        <Body dangerouslySetInnerHTML={{ __html: state.body }} />
+
+        <Phone>Phone: {state.author.phone}</Phone>
+
+        {/* <CommentsArea onClick={onClick}>
           <Icon>
             {' '}
             <CommentIcon />
           </Icon>
           <p> Comment</p>
         </CommentsArea>
-        {showComments && <CommentsInput onBlur={onBlur} />}
-      </SingleEntryConatiner>
+        {showComments && <CommentsInput onBlur={onBlur} />} */}
+      </Conatiner>
     </PageLayout>
   );
 }

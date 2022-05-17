@@ -18,6 +18,7 @@ export const Row = styled.div`
   justify-content: space-between;
   gap: 10px;
   cursor: pointer;
+  font-size: 14px;
 
   &:hover {
     background-color: #f2eaea;
@@ -28,7 +29,12 @@ export const Col = styled.div`
   padding: 5px 10px;
 `;
 
-export const ColId = styled(Col)``;
+export const ColId = styled(Col)`
+  text-transform: uppercase;
+  font-size: small;
+  width: 25px;
+  text-align: center;
+`;
 
 export const ColType = styled(Col)<{ category: string }>`
   padding: 0;
