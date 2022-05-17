@@ -16,7 +16,7 @@ export const getDistrict = (locations: IEntry): any =>
   locations && locations.location && locations.location.city
     ? locations.location.city
     : null;
-    
+
 export const getStatus = (locations: IEntry): any =>
   locations && locations.status && locations.status ? locations.status : null;
 

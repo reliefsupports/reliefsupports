@@ -15,6 +15,11 @@ export const Heading = styled.div`
 
 export const LogoWrapper = styled.div``;
 
+export const Logo = styled.img`
+  width: 110%;
+  cursor: pointer;
+`;
+
 export const HeaderActions = styled.div`
   display: flex;
   justify-content: space-between;

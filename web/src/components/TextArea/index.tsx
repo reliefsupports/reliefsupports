@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const InputField = styled.div`
+  margin: 5px 0;
+`;
+
 export const Textarea = styled.textarea`
   background: #ffffff;
   border: 1px solid #a3a3a3;
@@ -11,12 +15,11 @@ export const Textarea = styled.textarea`
 `;
 
 export const Label = styled.label`
-  font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 14px;
+  font-size: 14px;
   color: #000000;
+  line-height: 30px;
 `;
 
 export default function TextArea({
@@ -29,7 +32,7 @@ export default function TextArea({
   onChange,
 }: any) {
   return (
-    <div>
+    <InputField>
       <div>
         <Label htmlFor={name}>{label}</Label>
       </div>
@@ -40,6 +43,6 @@ export default function TextArea({
         value={value}
       />
       {error && touched && <span>{error}</span>}
-    </div>
+    </InputField>
   );
 }

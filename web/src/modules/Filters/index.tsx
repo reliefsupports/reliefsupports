@@ -12,7 +12,8 @@ export const Container = styled.div`
   align-items: center;
   gap: 10px;
   margin: 20px 0;
-  padding-bottom: 5px;
+  font-size: 14px;
+  padding: 5px;
 `;
 
 export const SearchInput = styled.input`

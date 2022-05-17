@@ -1,9 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 
+import logoUrl from 'assets/images/reliefsupports-logo.png';
+
 import {
   Container,
   Heading,
   LogoWrapper,
+  Logo,
   HeaderActions,
   CreateButton,
   AuthButton,
@@ -25,7 +28,7 @@ export default function Header({ banner = false }: any) {
     <Container>
       <Heading>
         <LogoWrapper>
-          <h1>ReliefSupports</h1>
+          <Logo src={logoUrl} alt="ReliefSupports" />
         </LogoWrapper>
 
         <HeaderActions>
