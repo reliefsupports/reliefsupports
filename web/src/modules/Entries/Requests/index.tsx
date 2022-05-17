@@ -6,7 +6,6 @@ import { fetch as apiFetchRequests } from 'api/entries';
 
 import Filters from 'modules/Filters';
 import EntryList from 'components/Entry/List';
-import Pagination from 'components/Pagination';
 
 import { IEntry } from 'types';
 
@@ -22,7 +21,7 @@ export default function Requests() {
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState('');
   const [priority, setPriority] = useState('');
-  const [status, setStatus] = useState('Published');
+  const [status, setStatus] = useState('');
   const [page, setPage] = useState(1);
 
   const fetchRequests = async (onPaginate = false) => {

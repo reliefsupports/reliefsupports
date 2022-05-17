@@ -21,7 +21,7 @@ export default function Requests() {
   const [keyword, setKeyword] = useState('');
   const [category, setCategory] = useState('');
   const [priority, setPriority] = useState('');
-  const [status, setStatus] = useState('Published');
+  const [status, setStatus] = useState('');
   const [page, setPage] = useState(1);
 
   const fetchRequests = async (onPaginate = false) => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { IEntry } from 'types';
@@ -31,7 +31,6 @@ import {
 
 import MedicalIcon from '../../assets/icons/medical';
 import VerifiedIcon from '../../assets/icons/Verified';
-import Reportcon from '../../assets/icons/Report';
 import CommentIcon from '../../assets/icons/Comment';
 
 export default function EntrySingle() {
