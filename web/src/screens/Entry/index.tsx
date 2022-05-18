@@ -23,6 +23,7 @@ import {
   Heading,
   ID,
   Meta,
+  Category,
   Labels,
   Label,
   Body,
@@ -48,7 +49,8 @@ export default function EntrySingle() {
             <ID>{id}</ID> - {getSummary(state)} {isVerified && <VerifiedIcon />}
           </Heading>
           <Meta>
-            At <span>{getDistrict(state)}</span>,{' '}
+            In <Category>{getCategory(state)}</Category> &bull;{' '}
+            <span>{getDistrict(state)}</span>,{' '}
             {dayjs(createdAt).format('MMM DD, YYYY HH:mm')} &bull;{' '}
             <span>
               {` by ${getAuthorName(state)}`}{' '}
