@@ -1,3 +1,7 @@
+import React, { useState } from 'react';
+
+import { AuthProvider } from 'contexts/Auth';
+
 import ThemeProvider from './ThemeProvider';
 
 type Props = {
@@ -5,5 +9,11 @@ type Props = {
 };
 
 export default function Providers({ children }: Props) {
-  return <ThemeProvider>{children}</ThemeProvider>;
+  const [user, setUser] = useState<null | any>('');
+
+  return (
+    <ThemeProvider>
+      <AuthProvider value={{ user, setUser }}>{children}</AuthProvider>
+    </ThemeProvider>
+  );
 }

@@ -1,15 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { signInWithPhoneNumber, RecaptchaVerifier } from 'firebase/auth';
 
 import styled from 'styled-components';
 
 import { auth } from 'config/firebase';
 
+import AuthContext from 'contexts/Auth';
+
 export const Input = styled.input`
   border: 1px solid #ccc;
 `;
 
 export default function Auth() {
+  const { user, setUser }: any = useContext(AuthContext);
+
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState('');
   const [isWaitingForOtp, setIsWaitingForOtp] = useState(false);
@@ -61,8 +65,9 @@ export default function Auth() {
       .confirm(otp)
       .then((result: any) => {
         // User signed in successfully.
-        console.log('signed ij', result);
+        console.log('signed', result.user);
         // ...
+        setUser(result);
       })
       .catch((error: any) => {
         // User couldn't sign in (bad verification code?)
@@ -70,6 +75,8 @@ export default function Auth() {
         console.log('sign in failed', error);
       });
   };
+
+  console.log(user);
 
   return (
     <div>
