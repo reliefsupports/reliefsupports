@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import dayjs from 'dayjs';
 
@@ -35,8 +34,6 @@ export default function EntrySingle() {
 
   const state = location.state as IEntry;
   const { id, createdAt, isVerified } = state;
-
-  const showIcon = getCategory(state) === 'medicine' ? true : false;
 
   return (
     <PageLayout>

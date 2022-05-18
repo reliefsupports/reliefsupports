@@ -1,6 +1,6 @@
 import axios from 'axios';
 import localStorage from './localStorage';
-import { apiBaseUrl, userSessionKey } from 'config';
+import { userSessionKey } from 'config';
 
 // @todo: Update proper axios type definitions
 const requestInterceptor = (req: any) => {
@@ -19,7 +19,7 @@ const responseInterceptor = (res: any) => {
 };
 
 export const init = () => {
-  axios.defaults.baseURL = apiBaseUrl;
+  axios.defaults.baseURL = '/api';
   axios.interceptors.request.use(requestInterceptor);
   axios.interceptors.response.use(responseInterceptor);
 };
