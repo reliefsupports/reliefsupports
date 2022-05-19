@@ -9,6 +9,7 @@ type Props = {
 };
 
 export default function Providers({ children }: Props) {
+  // @todo: persist login session
   const [user, setUser] = useState<null | any>('');
 
   return (

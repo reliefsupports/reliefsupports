@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { signInWithPhoneNumber, RecaptchaVerifier } from 'firebase/auth';
 
 import styled from 'styled-components';
@@ -7,12 +8,17 @@ import { auth } from 'config/firebase';
 
 import AuthContext from 'contexts/Auth';
 
+import PageLayout from 'layouts/PageLayout';
+import TextInput from 'components/TextInput';
+import Button from 'components/Button';
+
 export const Input = styled.input`
   border: 1px solid #ccc;
 `;
 
 export default function Auth() {
-  const { user, setUser }: any = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { setUser }: any = useContext(AuthContext);
 
   const [phone, setPhone] = useState('');
   const [otp, setOtp] = useState('');
@@ -68,6 +74,7 @@ export default function Auth() {
         console.log('signed', result.user);
         // ...
         setUser(result);
+        navigate('/');
       })
       .catch((error: any) => {
         // User couldn't sign in (bad verification code?)
@@ -76,40 +83,34 @@ export default function Auth() {
       });
   };
 
-  console.log(user);
-
   return (
-    <div>
-      Sign In with Phone Auth
+    <PageLayout minimalView>
+      <h3>Sign In</h3>
+
       {!isWaitingForOtp && (
         <div>
-          <div>
-            Phone:
-            <Input
-              type="text"
-              value={phone}
-              placeholder="eg. +94711111111"
-              onChange={(evt: any) => setPhone(evt.target.value)}
-            />
-          </div>
+          <TextInput
+            label="Phone Number"
+            value={phone}
+            placeholder="eg. +94711111111"
+            onChange={(evt: any) => setPhone(evt.target.value)}
+          />
           <div id="recaptcha-container" />
-          <input type="button" value="Sign In" onClick={handleSignIn} />
+          <Button onClick={handleSignIn}>Request OTP</Button>
         </div>
       )}
+
       {isWaitingForOtp && (
         <div>
-          <div>
-            OPT:
-            <Input
-              type="text"
-              value={otp}
-              placeholder="eg. 123456"
-              onChange={(evt: any) => setOtp(evt.target.value)}
-            />
-          </div>
-          <input type="button" value="Verify" onClick={handleVerification} />
+          <TextInput
+            label="OTP"
+            value={otp}
+            placeholder="eg. 123456"
+            onChange={(evt: any) => setOtp(evt.target.value)}
+          />
+          <Button onClick={handleVerification}>Verify &amp; Login</Button>
         </div>
       )}
-    </div>
+    </PageLayout>
   );
 }

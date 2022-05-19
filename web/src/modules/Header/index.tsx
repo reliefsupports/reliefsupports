@@ -1,4 +1,7 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import AuthContext from 'contexts/Auth';
 
 import logoUrl from 'assets/images/reliefsupports-logo.png';
 
@@ -14,11 +17,13 @@ import {
   PlusIcon,
 } from './styled';
 
-export default function Header({ banner = false }: any) {
+export default function Header({ banner = false, showActionLinks }: any) {
   const navigate = useNavigate();
 
+  const { user }: any = useContext(AuthContext);
+
   // @todo: get auth status
-  const isAuthenticated = false;
+  const isAuthenticated = !!user;
 
   const handleSignIn = () => navigate('/sign-in');
 
@@ -28,23 +33,29 @@ export default function Header({ banner = false }: any) {
     <Container>
       <Heading>
         <LogoWrapper>
-          <Logo src={logoUrl} alt="ReliefSupports" />
+          <Logo
+            src={logoUrl}
+            alt="ReliefSupports"
+            onClick={() => navigate('/')}
+          />
         </LogoWrapper>
 
-        <HeaderActions>
-          {/* <Select>
+        {showActionLinks && (
+          <HeaderActions>
+            {/* <Select>
             <option>En</option>
             <option>Si</option>
             <option>Ta</option>
           </Select> */}
 
-          <CreateButton onClick={handleCreate}>
-            <PlusIcon /> New Entry
-          </CreateButton>
-          <AuthButton onClick={handleSignIn}>
-            {isAuthenticated ? 'Sign Out' : 'Sign In'}
-          </AuthButton>
-        </HeaderActions>
+            <CreateButton onClick={handleCreate}>
+              <PlusIcon /> New Entry
+            </CreateButton>
+            <AuthButton onClick={handleSignIn}>
+              {isAuthenticated ? 'Sign Out' : 'Sign In'}
+            </AuthButton>
+          </HeaderActions>
+        )}
       </Heading>
 
       {banner && <HeaderImage />}
