@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { DefaultEditor } from 'react-simple-wysiwyg';
 
+import AuthContext from 'contexts/Auth';
 import PageLayout from 'layouts/PageLayout';
 
 import TextInput from 'components/TextInput';
@@ -33,6 +34,9 @@ const initialValues: any = {
 
 export default function CreateEntry() {
   const naviagate = useNavigate();
+
+  // @todo: Show a message to sign in if not logged in already.
+  const { user }: any = useContext(AuthContext);
 
   const [bodyHtml, setBodyHtml] = useState('');
 
