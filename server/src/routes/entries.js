@@ -179,7 +179,6 @@ router.post('/:id/comments', async (req, res) => {
       message: (await entry.save()).comments.find((c) => c.id === comment.id),
     });
   } catch (errors) {
-    console.log(errors);
     // @todo: return proper error code
     return res.status(500).json({
       code: 500,

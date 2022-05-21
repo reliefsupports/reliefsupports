@@ -165,8 +165,6 @@ export default function EntrySingle() {
     return buildCommentsTree(state.comments || []);
   }, [state.comments]);
 
-  console.log(commentsTree);
-
   return (
     <PageLayout>
       <Conatiner>
