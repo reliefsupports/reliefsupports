@@ -21,6 +21,10 @@ cd reliefsupports
 yarn // will install all the dependencies for all the apps at once
 ```
 
+#### Set `/web/.env` file.
+
+Copy `.env.example` to `.env` and update necessary values (Firebase)
+
 #### Run the application
 
 ```bash

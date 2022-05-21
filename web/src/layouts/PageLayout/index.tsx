@@ -12,21 +12,28 @@ export const Link = styled.p`
 type Props = {
   children: React.ReactNode;
   frontPage?: boolean;
+  minimalView?: boolean;
 };
 
-export default function PageLayout({ children, frontPage = false }: Props) {
+export default function PageLayout({
+  children,
+  frontPage = false,
+  minimalView = false,
+}: Props) {
   const navigate = useNavigate();
 
   const handleBack = () => navigate(-1);
 
   return (
     <div>
-      <Header />
+      <Header showActionLinks={!minimalView} />
 
-      {!frontPage && <Link onClick={handleBack}>&laquo; Back</Link>}
+      {!frontPage && !minimalView && (
+        <Link onClick={handleBack}>&laquo; Back</Link>
+      )}
 
       <div>{children}</div>
-      <Footer />
+      <Footer showDisclaimer={!minimalView} />
     </div>
   );
 }
