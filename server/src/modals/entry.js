@@ -32,6 +32,27 @@ const locationSchema = mongoose.Schema(
   { _id: false }
 );
 
+const commentSchema = mongoose.Schema(
+  {
+    id: {
+      type: String,
+      required: true,
+    },
+    author: authorSchema,
+    body: {
+      type: String,
+      required: true,
+    },
+    // @todo: do we track only the number of likes (store own likes)?
+    // @todo: add image support
+    parent: {
+      type: String,
+      default: null,
+    },
+  },
+  { timestamps: true, _id: false }
+);
+
 const entrySchema = mongoose.Schema(
   {
     id: {
@@ -56,6 +77,7 @@ const entrySchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    comments: [commentSchema],
     status: {
       type: String,
       enum: ['draft', 'published', 'attended', 'resolved', 'archived'],
