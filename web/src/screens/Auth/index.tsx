@@ -4,6 +4,8 @@ import { signInWithPhoneNumber, RecaptchaVerifier } from 'firebase/auth';
 
 import styled from 'styled-components';
 
+import { validate as apiValidateUser } from 'api/user';
+
 import { auth } from 'config/firebase';
 
 import AuthContext from 'contexts/Auth';
@@ -64,6 +66,17 @@ export default function Auth() {
       });
   };
 
+  const validateUser = async (user: any) => {
+    try {
+      const _user = await apiValidateUser(user);
+      console.log('$user', _user);
+      setUser(_user);
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleVerification = () => {
     if (!window.confirmationResult) return;
 
@@ -72,9 +85,8 @@ export default function Auth() {
       .then((result: any) => {
         // User signed in successfully.
         console.log('signed', result.user);
-        // ...
-        setUser(result);
-        navigate('/');
+
+        validateUser(result.user);
       })
       .catch((error: any) => {
         // User couldn't sign in (bad verification code?)

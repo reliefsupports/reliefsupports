@@ -1,10 +1,12 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from 'firebase/auth';
-import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { auth } from 'config/firebase';
+import AuthContext from 'contexts/Auth';
 
 import logoUrl from 'assets/images/reliefsupports-logo.png';
+
+import { auth } from 'config/firebase';
 
 import {
   Container,
@@ -20,13 +22,15 @@ import {
 
 export default function Header({ banner = false, showActionLinks }: any) {
   const navigate = useNavigate();
-  const [user] = useAuthState(auth);
+
+  const { user, setUser }: any = useContext(AuthContext);
 
   const isAuthenticated = !!user;
 
   const handleSignIn = () => {
     if (isAuthenticated) {
       signOut(auth);
+      setUser(null);
       return;
     }
     navigate('/sign-in');

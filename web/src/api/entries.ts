@@ -25,6 +25,6 @@ export async function fetch(query: any) {
   return get(`/entries?${searchParams.toString()}`);
 }
 
-export async function create(entry:any) {
+export async function create(entry: any) {
   return post(`/entries`, entry);
 }
