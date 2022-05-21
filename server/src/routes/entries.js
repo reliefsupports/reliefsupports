@@ -36,7 +36,8 @@ router.get('/', async (req, res) => {
       ];
 
     const limit = req.query.limit || 20;
-    const offset = req.query.page && req.query.page > 0 ? (req.query.page - 1) * limit : 0;
+    const offset =
+      req.query.page && req.query.page > 0 ? (req.query.page - 1) * limit : 0;
 
     const entries = await Entry.find(query).skip(offset).limit(limit);
     return res.status(200).json({
@@ -147,6 +148,86 @@ router.delete('/:id', async (req, res) => {
       code: 200,
       message: {
         id: id,
+      },
+    });
+  } catch (errors) {
+    // @todo: return proper error code
+    return res.status(500).json({
+      code: 500,
+      errors: errors,
+    });
+  }
+});
+
+// ::entries.add-comment
+router.post('/:id/comments', async (req, res) => {
+  try {
+    const body = pick(req.body, ['body', 'author', 'parent']);
+    // @todo: pre-validate values, and kick out if invalid.
+
+    const entry = await Entry.findOne({ id: req.params.id });
+
+    const comment = {
+      id: uid(4),
+      ...body,
+    };
+
+    entry.comments.push(comment);
+
+    return res.status(200).json({
+      code: 200,
+      message: (await entry.save()).comments.find((c) => c.id === comment.id),
+    });
+  } catch (errors) {
+    console.log(errors);
+    // @todo: return proper error code
+    return res.status(500).json({
+      code: 500,
+      errors: errors,
+    });
+  }
+});
+
+// ::entries.patch-comment
+router.patch('/:id/comments/:commentId', async (req, res) => {
+  try {
+    const entry = await Entry.findOne({ id: req.params.id });
+
+    const { commentId } = req.params;
+    const { body } = req.body;
+
+    const comment = entry.comments.find((c) => c.id === commentId);
+    comment.body = body;
+
+    return res.status(200).json({
+      code: 200,
+      message: (await entry.save()).comments.find((c) => c.id === commentId),
+    });
+  } catch (errors) {
+    // @todo: return proper error code
+    return res.status(500).json({
+      code: 500,
+      errors: errors,
+    });
+  }
+});
+
+// ::entries.delete-comment
+router.delete('/:id/comments/:commentId', async (req, res) => {
+  try {
+    const entry = await Entry.findOne({ id: req.params.id });
+
+    const commentId = req.params.commentId;
+
+    entry.comments = entry.comments.filter(
+      (comment) => comment.id !== commentId
+    );
+
+    await entry.save();
+    return res.status(200).json({
+      code: 200,
+      message: {
+        id: commentId,
       },
     });
   } catch (errors) {
