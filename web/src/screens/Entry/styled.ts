@@ -32,6 +32,10 @@ export const Meta = styled.div`
   line-height: 25px;
 `;
 
+export const Category = styled.span`
+  text-transform: capitalize;
+`;
+
 export const Labels = styled.div`
   display: flex;
   flex-direction: row;

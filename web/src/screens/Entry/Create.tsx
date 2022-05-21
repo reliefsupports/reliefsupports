@@ -1,10 +1,11 @@
+import { useState } from 'react';
 import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import { DefaultEditor } from 'react-simple-wysiwyg';
 
 import PageLayout from 'layouts/PageLayout';
 
 import TextInput from 'components/TextInput';
-import TextArea from 'components/TextArea';
 import Select from 'components/Select';
 import Button from 'components/Button';
 
@@ -33,6 +34,8 @@ const initialValues: any = {
 export default function CreateEntry() {
   const naviagate = useNavigate();
 
+  const [bodyHtml, setBodyHtml] = useState('');
+
   return (
     <PageLayout>
       <Conatiner>
@@ -44,9 +47,9 @@ export default function CreateEntry() {
           }}
           onSubmit={async (values, { setSubmitting, resetForm }) => {
             setSubmitting(true);
-            values.body = '<p>'.concat(values.body, '</p>');
             const response = await apiCreateEntry({
               ...values,
+              body: bodyHtml,
               ...{
                 author: {
                   name: 'Snoop dogg',
@@ -105,14 +108,10 @@ export default function CreateEntry() {
                 touched={touched.summary}
               />
 
-              <TextArea
-                name="body"
-                label="Body"
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.body}
-                error={errors.body}
-                touched={touched.body}
+              <p>Text</p>
+              <DefaultEditor
+                value={bodyHtml}
+                onChange={(evt: any) => setBodyHtml(evt.target.value)}
               />
 
               <TextInput
