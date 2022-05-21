@@ -10,8 +10,6 @@ import AuthContext from 'contexts/Auth';
 import PageLayout from 'layouts/PageLayout';
 import TextArea from 'components/TextArea';
 
-import { IEntry } from 'types';
-
 import {
   getReqType,
   getReqPriority,
@@ -36,7 +34,6 @@ import {
   Body,
   Phone,
 } from './styled';
-import TextArea from '../../components/TextArea';
 import { Formik } from 'formik';
 import { Button } from '../../components/core';
 import { createComment } from '../../api/entries';
