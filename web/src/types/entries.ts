@@ -33,12 +33,23 @@ export type Location = {
   city: string;
 };
 
+export interface IComment {
+  id: string;
+  author: Author;
+  body: string;
+  parent?: string;
+  children: IComment[];
+  createdAt: string;
+  lastUpdatedAt: string;
+}
+
 export interface IEntry {
   id: string;
   type: Type.Request | Type.Offer;
   category: Category.Medicine | Category.Other;
   summary: string;
   body: string;
+  comments: IComment[];
   createdAt: string;
   lastUpdatedAt: string;
   author: Author;
