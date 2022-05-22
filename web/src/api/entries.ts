@@ -2,7 +2,7 @@ import { get, post, del, patch } from 'utils/http';
 
 import entries from 'data/entries.json';
 
-import { Type } from 'types';
+import { Type, IComment } from 'types';
 
 export async function fetchRequests(offset = 0, limit = 2) {
   return entries
@@ -30,7 +30,11 @@ export async function create(entry: any) {
 }
 
 export async function createComment(entryId: string, comment: any) {
-  return post(`/entries/${entryId}/comments`, comment);
+  return post(
+    `/entries/${entryId}/comments`,
+    comment
+  ) as unknown as Promise<IComment>;
+  // @todo Fix type definition
 }
 
 export async function editComment(

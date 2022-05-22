@@ -1,5 +1,5 @@
-import { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import { createContext, useContext } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
@@ -39,19 +39,25 @@ import { Button } from '../../components/core';
 import { createComment } from '../../api/entries';
 import { useMemo, useState } from 'react';
 
+const CommentsContext = createContext({
+  updateComments: (comments: IComment) => {},
+  postId: '',
+});
+
 interface ICommentEditorProps {
-  postId: string;
   replyingTo?: string;
 }
 
-const initialValues: any = {
+const commentEditorInitialValues = {
   body: '',
 };
 
-function CommentEditor({ postId, replyingTo }: ICommentEditorProps) {
+function CommentEditor({ replyingTo }: ICommentEditorProps) {
+  const { postId, updateComments } = useContext(CommentsContext);
+
   return (
     <Formik
-      initialValues={initialValues}
+      initialValues={commentEditorInitialValues}
       validate={(values) => {
         const errors: any = {};
         return errors;
@@ -74,6 +80,7 @@ function CommentEditor({ postId, replyingTo }: ICommentEditorProps) {
         if (response) {
           setSubmitting(false);
           resetForm();
+          updateComments(response);
         }
       }}
     >
@@ -109,7 +116,7 @@ function CommentEditor({ postId, replyingTo }: ICommentEditorProps) {
   );
 }
 
-function Comment(comment: IComment & { postId: string }): JSX.Element {
+function Comment(comment: IComment): JSX.Element {
   const [showReply, setShowReply] = useState(false);
 
   return (
@@ -140,11 +147,9 @@ function Comment(comment: IComment & { postId: string }): JSX.Element {
         >
           {showReply ? 'Hide reply' : 'Reply'}
         </Button>
-        {showReply && (
-          <CommentEditor postId={comment.postId} replyingTo={comment.id} />
-        )}
+        {showReply && <CommentEditor replyingTo={comment.id} />}
         {comment?.children?.map((c) => (
-          <Comment key={`reply_${c.id}`} postId={comment.postId} {...c} />
+          <Comment key={`reply_${c.id}`} {...c} />
         ))}
       </div>
     </div>
@@ -154,6 +159,7 @@ function Comment(comment: IComment & { postId: string }): JSX.Element {
 export default function EntrySingle() {
   const { user }: any = useContext(AuthContext);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const state = location.state as IEntry;
   const { id, createdAt, isVerified } = state;
@@ -218,10 +224,21 @@ export default function EntrySingle() {
           </TabPanel>
         </Tabs>
       </Conatiner>
-      {commentsTree.map((c) => (
-        <Comment key={`comment_${c.id}`} postId={state.id} {...c} />
-      ))}
-      <CommentEditor postId={id} />
+      <CommentsContext.Provider
+        value={{
+          updateComments: (comment: IComment) => {
+            navigate(``, {
+              state: { ...state, comments: [...state.comments, comment] },
+            });
+          },
+          postId: id,
+        }}
+      >
+        {commentsTree.map((c) => (
+          <Comment key={`comment_${c.id}`} {...c} />
+        ))}
+        <CommentEditor />
+      </CommentsContext.Provider>
     </PageLayout>
   );
 }
