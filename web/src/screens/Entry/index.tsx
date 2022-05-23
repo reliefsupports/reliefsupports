@@ -143,24 +143,10 @@ function Comment(comment: IComment): JSX.Element {
       <div style={{ paddingLeft: '1rem' }}>
         {!comment.deleted && (
           <>
-            <Button
-              onClick={() => setShowReply(!showReply)}
-              style={{
-                backgroundColor: '#f5f5f5',
-                border: '1px solid #f5f5f5',
-                color: '#000',
-              }}
-            >
+            <Button onClick={() => setShowReply(!showReply)}>
               {showReply ? 'Hide reply' : 'Reply'}
             </Button>
-            <Button
-              onClick={() => setShowDeleteConfirmation(true)}
-              style={{
-                backgroundColor: '#f5f5f5',
-                border: '1px solid #f5f5f5',
-                color: '#000',
-              }}
-            >
+            <Button onClick={() => setShowDeleteConfirmation(true)}>
               Delete
             </Button>
           </>
