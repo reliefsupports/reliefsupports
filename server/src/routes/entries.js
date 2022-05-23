@@ -215,19 +215,30 @@ router.patch('/:id/comments/:commentId', async (req, res) => {
 router.delete('/:id/comments/:commentId', async (req, res) => {
   try {
     const entry = await Entry.findOne({ id: req.params.id });
-
     const commentId = req.params.commentId;
 
-    entry.comments = entry.comments.filter(
-      (comment) => comment.id !== commentId
-    );
+    const comment = entry.comments.find((c) => c.id === commentId);
+    if (!comment) {
+      return res.status(404).json({
+        code: 404,
+        message: 'Comment not found',
+      });
+    }
+
+    // Soft-delete
+    comment.deleted = true;
+    comment.body = 'This comment has been deleted.';
+    comment.author = {
+      name: 'unknown user',
+      phone: '-',
+      avatarUrl: 'https://placekitten.com/g/64/64',
+      orgnization: '-',
+    };
 
     await entry.save();
     return res.status(200).json({
       code: 200,
-      message: {
-        id: commentId,
-      },
+      message: comment,
     });
   } catch (errors) {
     // @todo: return proper error code

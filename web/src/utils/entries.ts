@@ -36,24 +36,15 @@ export const buildCommentsTree = (comments: IComment[]): IComment[] => {
 
   // Assume: comments are sorted by date, replies always come after their parent
   const index: { [id: string]: IComment } = {};
-  for (const comment of comments) {
+  for (const comment of comments.sort(
+    (a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt)
+  )) {
     index[comment.id] = comment;
     comment.children = [];
 
     const { parent } = comment;
     if (parent) {
       // If it has a parent, it's a reply
-      if (!index[parent]) {
-        // Reply to a deleted comment
-        index[parent] = {
-          id: parent,
-          body: '<i>deleted</i>',
-          author: { name: '<i>deleted</i>', phone: '<i>deleted</i>' },
-          createdAt: comment.createdAt,
-          lastUpdatedAt: comment.lastUpdatedAt,
-          children: [],
-        };
-      }
       index[parent].children.push(comment);
     } else {
       topLevel.push(comment);

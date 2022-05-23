@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import dayjs from 'dayjs';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import dayjs from 'dayjs';
 
 import VerifiedIcon from 'assets/icons/Verified';
 
@@ -36,11 +36,13 @@ import {
 } from './styled';
 import { Formik } from 'formik';
 import { Button } from '../../components/core';
-import { createComment } from '../../api/entries';
+import { createComment, deleteComment } from '../../api/entries';
 import { useMemo, useState } from 'react';
+import { ConfirmationDialog } from '../../components/ConfirmationDialog';
 
 const CommentsContext = createContext({
-  updateComments: (comments: IComment) => {},
+  onAddComment: (comment: IComment) => {},
+  onDeleteComment: (comment: IComment) => {},
   postId: '',
 });
 
@@ -53,7 +55,7 @@ const commentEditorInitialValues = {
 };
 
 function CommentEditor({ replyingTo }: ICommentEditorProps) {
-  const { postId, updateComments } = useContext(CommentsContext);
+  const { postId, onAddComment: updateComments } = useContext(CommentsContext);
 
   return (
     <Formik
@@ -98,7 +100,7 @@ function CommentEditor({ replyingTo }: ICommentEditorProps) {
         <form onSubmit={handleSubmit}>
           <TextArea
             name="body"
-            label="Comment"
+            label={replyingTo ? 'Reply' : 'Comment'}
             onChange={handleChange}
             onBlur={handleBlur}
             value={values.body}
@@ -118,6 +120,8 @@ function CommentEditor({ replyingTo }: ICommentEditorProps) {
 
 function Comment(comment: IComment): JSX.Element {
   const [showReply, setShowReply] = useState(false);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const { postId, onDeleteComment } = useContext(CommentsContext);
 
   return (
     <div
@@ -137,16 +141,41 @@ function Comment(comment: IComment): JSX.Element {
         </span>
       </Meta>
       <div style={{ paddingLeft: '1rem' }}>
-        <Button
-          onClick={() => setShowReply(!showReply)}
-          style={{
-            backgroundColor: '#f5f5f5',
-            border: '1px solid #f5f5f5',
-            color: '#000',
+        {!comment.deleted && (
+          <>
+            <Button
+              onClick={() => setShowReply(!showReply)}
+              style={{
+                backgroundColor: '#f5f5f5',
+                border: '1px solid #f5f5f5',
+                color: '#000',
+              }}
+            >
+              {showReply ? 'Hide reply' : 'Reply'}
+            </Button>
+            <Button
+              onClick={() => setShowDeleteConfirmation(true)}
+              style={{
+                backgroundColor: '#f5f5f5',
+                border: '1px solid #f5f5f5',
+                color: '#000',
+              }}
+            >
+              Delete
+            </Button>
+          </>
+        )}
+        <ConfirmationDialog
+          open={showDeleteConfirmation}
+          title="Delete Comment"
+          description="Are you sure you want to delete this comment?"
+          onClose={() => setShowDeleteConfirmation(false)}
+          onConfirm={async () => {
+            const deletedComment = await deleteComment(postId, comment.id);
+            onDeleteComment(deletedComment);
+            setShowDeleteConfirmation(false);
           }}
-        >
-          {showReply ? 'Hide reply' : 'Reply'}
-        </Button>
+        />
         {showReply && <CommentEditor replyingTo={comment.id} />}
         {comment?.children?.map((c) => (
           <Comment key={`reply_${c.id}`} {...c} />
@@ -217,28 +246,40 @@ export default function EntrySingle() {
                 <TextArea />
               </div>
             )}
-            <div>All the responses goes here</div>
+            <CommentsContext.Provider
+              value={{
+                onAddComment: (comment: IComment) => {
+                  navigate(``, {
+                    replace: true,
+                    state: { ...state, comments: [...state.comments, comment] },
+                  });
+                },
+                onDeleteComment: (comment: IComment) => {
+                  navigate(``, {
+                    replace: true,
+                    state: {
+                      ...state,
+                      comments: [
+                        ...state.comments.filter((c) => c.id !== comment.id),
+                        comment,
+                      ],
+                    },
+                  });
+                },
+                postId: id,
+              }}
+            >
+              {commentsTree.map((c) => (
+                <Comment key={`comment_${c.id}`} {...c} />
+              ))}
+              <CommentEditor />
+            </CommentsContext.Provider>
           </TabPanel>
           <TabPanel>
             <div>Activity logs goes here</div>
           </TabPanel>
         </Tabs>
       </Conatiner>
-      <CommentsContext.Provider
-        value={{
-          updateComments: (comment: IComment) => {
-            navigate(``, {
-              state: { ...state, comments: [...state.comments, comment] },
-            });
-          },
-          postId: id,
-        }}
-      >
-        {commentsTree.map((c) => (
-          <Comment key={`comment_${c.id}`} {...c} />
-        ))}
-        <CommentEditor />
-      </CommentsContext.Provider>
     </PageLayout>
   );
 }

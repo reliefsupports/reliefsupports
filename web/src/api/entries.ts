@@ -46,5 +46,7 @@ export async function editComment(
 }
 
 export async function deleteComment(entryId: string, commentId: string) {
-  return del(`/entries/${entryId}/comments/${commentId}`);
+  return del(
+    `/entries/${entryId}/comments/${commentId}`
+  ) as unknown as Promise<IComment>;
 }
