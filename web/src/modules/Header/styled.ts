@@ -13,11 +13,15 @@ export const Heading = styled.div`
   align-items: center;
 `;
 
-export const LogoWrapper = styled.div``;
+export const LogoWrapper = styled.div`
+  padding :10px;
+`;
 
 export const Logo = styled.img`
-  width: 110%;
   cursor: pointer;
+  @media screen and (max-width: 768px){
+    width:90px;
+  }
 `;
 
 export const HeaderActions = styled.div`
@@ -32,11 +36,22 @@ export const CreateButton = styled(Button)`
   justify-content: center;
   align-items: center;
   gap: 3px;
+  @media screen and (max-width: 768px){
+    min-width: 90px;
+    height: 26px;
+    width: fit-content;
+    font-size: 11px;
+  }
 `;
 
 export const AuthButton = styled(Button)`
   background: #000000;
   color: #fff;
+  @media screen and (max-width: 768px){
+    min-width: 90px;
+    height: 26px;
+    font-size: 11px;
+     }
 `;
 
 // export const Select = styled.select`

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
+import styled from 'styled-components';
 
 import { fetch as apiFetchRequests } from 'api/entries';
 
@@ -9,9 +10,25 @@ import EntryList from 'components/Entry/List';
 
 import { IEntry } from 'types';
 
+import MobileList from 'components/Entry/MobileList';
+
 export const toReadableDate = (dateStr: string) => {
   return dayjs(dateStr).format('MMM DD, YYYY HH:mm');
 };
+
+export const DesktopView = styled.div`
+  display: flex;
+  @media screen and (max-width: 425px) {
+    display: none;
+  }
+`;
+
+export const MobileView = styled.div`
+  display: none;
+  @media screen and (max-width: 425px) {
+    display: flex;
+  }
+`;
 
 export default function Requests() {
   const navigate = useNavigate();
@@ -59,25 +76,33 @@ export default function Requests() {
 
   return (
     <div>
-      <div>
-        <Filters
-          keyword={keyword}
-          category={category}
-          priority={priority}
-          status={status}
-          onChangeKeyword={setKeyword}
-          onChangeCategory={setCategory}
-          onChangePriority={setPriority}
-          onChangeStatus={setStatus}
-        />
+      <Filters
+        keyword={keyword}
+        category={category}
+        priority={priority}
+        status={status}
+        onChangeKeyword={setKeyword}
+        onChangeCategory={setCategory}
+        onChangePriority={setPriority}
+        onChangeStatus={setStatus}
+      />
 
+      <DesktopView>
         <EntryList
           entries={requestsFiltered}
           onClick={handleClick}
           onNext={() => fetchRequests(true)}
         />
-        {/* <Pagination page={page} handleChange={({ value }: any)=>{setPage(value)}}/> */}
-      </div>
+      </DesktopView>
+
+      <MobileView>
+        <MobileList
+          entries={requestsFiltered}
+          onClick={handleClick}
+          onNext={() => fetchRequests(true)}
+        />
+      </MobileView>
+      {/* <Pagination page={page} handleChange={({ value }: any)=>{setPage(value)}}/> */}
     </div>
   );
 }

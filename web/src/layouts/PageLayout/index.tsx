@@ -9,6 +9,10 @@ export const Link = styled.p`
   cursor: pointer;
 `;
 
+export const Box = styled.div`
+ padding :10px;
+`
+
 type Props = {
   children: React.ReactNode;
   frontPage?: boolean;
@@ -25,7 +29,7 @@ export default function PageLayout({
   const handleBack = () => navigate(-1);
 
   return (
-    <div>
+    <Box>
       <Header showActionLinks={!minimalView} />
 
       {!frontPage && !minimalView && (
@@ -34,6 +38,6 @@ export default function PageLayout({
 
       <div>{children}</div>
       <Footer showDisclaimer={!minimalView} />
-    </div>
+    </Box>
   );
 }
