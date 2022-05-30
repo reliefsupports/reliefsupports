@@ -4,7 +4,10 @@ import './reset.css';
 import './main.css';
 
 export const Container = styled.div`
-  padding: 40px 100px;
+  padding: 40px;
+  @media screen and (max-width: 768px){
+    padding: 20px;
+  }
 `;
 
 type Props = {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
+import styled from 'styled-components';
 
 import { fetch as apiFetchRequests } from 'api/entries';
 
@@ -8,10 +9,25 @@ import Filters from 'modules/Filters';
 import EntryList from 'components/Entry/List';
 
 import { IEntry } from 'types';
+import MobileList from 'components/Entry/MobileList';
 
 export const toReadableDate = (dateStr: string) => {
   return dayjs(dateStr).format('MMM DD, YYYY HH:mm');
 };
+
+export const DesktopView = styled.div`
+  display: flex;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
+export const MobileView = styled.div`
+  display: none;
+  @media screen and (max-width: 768px) {
+    display: flex;
+  }
+`;
 
 export default function Requests() {
   const navigate = useNavigate();
@@ -68,11 +84,21 @@ export default function Requests() {
           onChangeStatus={setStatus}
         />
 
-        <EntryList
-          entries={requestsFiltered}
-          onClick={handleClick}
-          onNext={() => fetchRequests(true)}
-        />
+        <DesktopView>
+          <EntryList
+            entries={requestsFiltered}
+            onClick={handleClick}
+            onNext={() => fetchRequests(true)}
+          />
+        </DesktopView>
+
+        <MobileView>
+          <MobileList
+            entries={requestsFiltered}
+            onClick={handleClick}
+            onNext={() => fetchRequests(true)}
+          />
+        </MobileView>
         {/* <Pagination page={page} handleChange={({ value }: any)=>{setPage(value)}}/> */}
       </div>
     </div>
