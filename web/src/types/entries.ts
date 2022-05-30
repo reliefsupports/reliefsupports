@@ -35,6 +35,7 @@ export type Location = {
 
 export interface IComment {
   id: string;
+  deleted: boolean;
   author: Author;
   body: string;
   parent?: string;

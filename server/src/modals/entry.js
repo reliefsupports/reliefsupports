@@ -38,6 +38,10 @@ const commentSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    deleted: {
+      type: Boolean,
+      default: false,
+    },
     author: authorSchema,
     body: {
       type: String,
