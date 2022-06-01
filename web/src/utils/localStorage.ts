@@ -10,7 +10,7 @@ const localStorage = {
       return null;
     }
   },
-  remove: (key: string) => window.localStorage.removeItem(key),
+  unset: (key: string) => window.localStorage.removeItem(key),
   clear: () => window.localStorage.clear(),
 };
 

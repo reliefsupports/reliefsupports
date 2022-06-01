@@ -1,6 +1,6 @@
 const express = require('express');
-// const jwt = require('jsonwebtoken');
-const uniqid = require('uniqid');
+const jwt = require('jsonwebtoken');
+const pick = require('lodash/pick');
 
 const router = express.Router();
 
@@ -9,8 +9,8 @@ const authMiddleware = require('../middlewares/authenticate');
 
 const User = require('../modals/user');
 
-// const config = require('../config');
-// const { jwtSecret } = config;
+const config = require('../config');
+const { jwtSecret } = config;
 
 // ::user.getSingle
 router.get('/:id', authMiddleware, async (req, res) => {
@@ -49,27 +49,39 @@ router.get('/:id', authMiddleware, async (req, res) => {
 // @todo: ::user.post
 router.post('/', authMiddleware, async (req, res) => {
   const userData = req.body;
-  const { phone } = userData;
+  const { uid, phoneNumber } = userData;
 
   try {
-    const userIfExists = await User.findOne({ phone: phone });
+    const userCursor = await User.findOne({ phone: phoneNumber });
+    const userIfExists = pick(userCursor, [
+      'avatarUrl',
+      'orgnization',
+      '_id',
+      'phone',
+      'createdAt',
+      'updatedAt',
+      'firstName',
+      'lastName',
+    ]);
+
+    // @todo: put more details here
+    const accessToken = jwt.sign({ uid }, jwtSecret);
 
     if (userIfExists)
-      return res.status(400).json({
-        code: 400,
-        message: 'Bad Request',
+      return res.status(200).json({
+        code: 200,
+        message: { ...userIfExists, accessToken, newUser: false },
       });
 
-    // @todo: set _id from the request recieve from Firebase
     const user = new User({
-      _id: uniqid(),
-      phone,
+      _id: uid,
+      phone: phoneNumber,
     });
 
     await user.save();
     return res.status(200).json({
       code: 200,
-      message: user,
+      message: { ...user, accessToken, newUser: true },
     });
   } catch (errors) {
     // @todo: return proper error code
@@ -78,31 +90,6 @@ router.post('/', authMiddleware, async (req, res) => {
       errors: errors,
     });
   }
-
-  // @todo: Enable below lines of code once auth is ready
-  // const { _id } = req.user;
-  // const userData = req.body;
-  // const { _id } = req.user;
-  // const userData = req.body;
-  // try {
-  //   const createdAt = `${new Date()}`;
-  //   const user = {
-  //     ...userFields,
-  //     ...userData,
-  //     id,
-  //     createdAt,
-  //     updatedAt: createdAt,
-  //   };
-  //   await UserEx.create(id, user);
-  //   const accessToken = jwt.sign({ id }, jwtSecret);
-  //   response.code = 200;
-  //   response.message = { ...user, accessToken, isNewUser: false };
-  // } catch (err) {
-  //   response.code = 401;
-  //   response.message = err;
-  // }
-  // return res.status(response.code).send(userData);
-  // -----------
 });
 
 // // ::user/auth.post

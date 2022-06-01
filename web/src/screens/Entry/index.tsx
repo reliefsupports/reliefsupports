@@ -198,7 +198,7 @@ export default function EntrySingle() {
 
         <Phone>Phone: {state.author.phone}</Phone>
 
-        {!!user && (
+        {user && user?.userRole === 'moderator' && (
           <div>
             <p>Approve</p>
             <p>Reject</p>
